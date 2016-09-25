@@ -1,0 +1,116 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=1.5cm]{geometry}
+%
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{ulem}
+
+\usepackage{caratula/caratula}
+\def\doubleunderline#1{\underline{\underline{#1}}}
+
+\begin{document}
+
+\input{caratula.tex}
+%Carátula
+\maketitle
+\newpage
+
+%Indice
+\tableofcontents
+\newpage
+
+% Demás secciones
+%
+\section{Introducción}
+% \input{introduccion.tex}
+
+\section{Suposiciones adicionales}
+\begin{itemize}
+	\item a
+\end{itemize}
+
+\section{Restricciones lenguaje natural}
+\begin{itemize}
+	\item a
+\end{itemize}
+
+\section{MR}
+A continuación, detallamos el modelo relacional correspondiente a nuestra BDD.
+
+%% unitarios
+
+\textbf{Persona} {\underline{dni}, nombre, apellido, fechaDeNacimiento, \
+	\dashuline{calleYnro}, \dashuline{provincia}, \dashuline{ciudad}}
+
+\textbf{Telefono} {\underline{numero}, \dashuline{dni}, \dashuline{idDepartamento}}
+
+\textbf{RolEnCaso} {\underline{idRol}, nombre}
+
+\textbf{CategoriaCaso} {\underline{idCategoria}, nombre, cantidadDeCasos}
+
+\textbf{OficialDePolicia} {\underline{dni}, numeroPlaca, fechaIngreso, 
+	numeroEscritorio, \dashuline{idRango}, \dashuline{idServicio}}
+
+\textbf{Servicio} {\underline{idServicio}, nombre}
+
+\textbf{Rango} {\underline{idRango}, nombre}
+
+\textbf{CasoCriminal} {\underline{idCaso}, fechaOcurrio, horaOcurrio, \ 
+	lugarOcurrio, descripcion, fechaIngreso, \
+	\dashuline{idCategoria}, \dashuline{idInvestigadorPrincipal}, \
+	\dashuline{idInvestigadorResolvedor}}
+
+\textbf{EstadoCaso} {\underline{idEstado}, \dashuline{idCaso}}
+
+\textbf{Resuelto} {\underline{idEstado}, \ 	
+	descripcionResuelto}
+
+\textbf{Pendiente} {\underline{idEstado}}
+
+\textbf{Congelado} {\underline{idEstado}, \
+	fechaCongelado, comentario}
+
+\textbf{Descartado} {\underline{idEstado}, \
+	fechaDescartado, motivo}
+
+\textbf{Evento} {\underline{idEvento}, fechaOcurrio, horaOcurrio, descripcion} 
+
+\textbf{Evidenca} {\underline{idEvidencia}, fechEncuentro, horaEncuentro, descripcion, \
+	fechaSellado, horaSellado, fechaIngreso, \dashuline{idCaso}, }
+
+\textbf{Departamento} {\underline{idDepartamento}, nombre, \dashuline{ \ 
+	idDepartamentoSupervisado}, \dashuline{calleYnro}, \dashuline{provincia}, \ 
+	\dashuline{ciudad}}
+
+\textbf{Domicilio} {\underline{calleYnro}, \underline{provincia}, \underline{ciudad}}
+
+%% relacions n:m
+\textbf{Culpable} {\underline{dni}, \underline{idCaso}}
+
+\textbf{InvestigadorAuxiliar} {\underline{idCaso}, \underline{dniOficialPolicia}}
+
+%% n:m:p
+\textbf{Involucra} {\underline{dni}, \underline{idCaso}, \dashuline{ \ 
+	idRol}}
+
+\textbf{ParticipaEn} {\underline{dni}, \underline{idEvento}, \dashuline{ \
+	idCaso}}
+
+\textbf{PresentaTestimonio} {texto, hora, fecha, \underline{dniTestigo}, \
+	\underline{idCaso}, \dashuline{dniOficial}}
+
+\textbf{Custodia} {\underline{idEvidencia}, \underline{dniOficial}, \
+	\dashuline{calleYnro}, \dashuline{provincia}, \dashuline{ciudad}}
+
+
+
+\section{Aclaraciones sobre las búsquedas}
+Las búsquedas solicitas en el enunciado se encuentran en el archivo adjunto busquedas.sql
+
+%
+%
+% \section{Conclusiones}
+% \input{conclusiones.tex}
+%
+
+\end{document}
