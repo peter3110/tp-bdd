@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.9)  24 SEP 2016 20:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.9)  5 OCT 2016 19:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -497,35 +497,46 @@ LaTeX Info: Redefining \% on input line 1.
 \openout3 = `main.toc'.
 
  [2]
-Overfull \hbox (2.41537pt too wide) in paragraph at lines 58--62
+Overfull \hbox (9.25746pt too wide) in paragraph at lines 59--62
+[]\OT1/cmr/bx/n/10.95 OficialDePolicia $[]$\OT1/cmr/m/n/10.95 , nu-me-ro-Pla-ca
+, fe-chaIn-gre-so, nu-me-roEs-cri-to-rio, |   [], |   [], |   [] 
+ []
+
+
+Overfull \hbox (2.41537pt too wide) in paragraph at lines 67--71
 []\OT1/cmr/bx/n/10.95 CasoCriminal $[]$\OT1/cmr/m/n/10.95 , fe-chaO-cu-rrio, ho
 -raO-cu-rrio,  lu-ga-rO-cu-rrio, des-crip-cion, fe-chaIn-gre-so,  |   [],
  []
 
-[3] (./main.aux
+[3] [4] (./main.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
-) ) 
+) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 48 ({)
+### bottom level 
 Here is how much of TeX's memory you used:
  3172 strings out of 493089
  42895 string characters out of 6134842
- 121531 words of memory out of 5000000
+ 124531 words of memory out of 5000000
  6609 multiletter control sequences out of 15000+600000
  8770 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,8n,30p,267b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
-b></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-/usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></u
-sr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/
-local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (3 pages, 466716 bytes).
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss1
+0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx
+10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
+0.pfb>
+Output written on main.pdf (4 pages, 467633 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 51 PDF objects out of 1000 (max. 8388607)
+ 34 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 

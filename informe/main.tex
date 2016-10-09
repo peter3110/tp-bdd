@@ -24,14 +24,20 @@
 \section{Introducción}
 % \input{introduccion.tex}
 
-\section{Suposiciones adicionales}
+\section{Restricciones del lenguaje natural}
 \begin{itemize}
-	\item a
-\end{itemize}
-
-\section{Restricciones lenguaje natural}
-\begin{itemize}
-	\item a
+	\item La fecha de cada testimonio no debe ser anterior a la fecha del caso en el cual este es presentado.
+	\item La fecha de cada evento no debe ser anterior a la fecha del caso.
+	\item La fecha de ingreso del investigador principal del caso no debe ser posterior a la fecha en que ocurrio el mismo.
+	\item La fecha de ingreso de cada auxiliar del caso no debe ser posterior a la fecha en que ocurrio el mismo.
+	\item La fecha de nacimiento de una persona no puede ser anterior a la fecha en la que ocurre el caso en el que esta involucrada.
+	\item La fecha de ingreso de un oficial de policia no puede ser anterior a su fecha de nacimiento.
+	\item Una evidencia no puede ser custodiada en dos localizaciones diferentes para una misma fecha y hora.
+	\item Un departamento no puede supervisarse a si mismo.
+	\item El culpable de un caso resuelto no puede ser una persona que no este involucrada en el caso.
+	\item La fecha de congelado de un caso congelado no puede ser anterior a la fecha en que ocurrió el caso.
+	\item La fecha de descarte de un caso descartado no puede ser anterior a la fecha en que ocurrió el caso.
+	\item Si una persona es culpable de un Caso, o un Oficial resolvió un Caso, entonces el estado del caso es de tipo Resuelto.
 \end{itemize}
 
 \section{MR}
@@ -40,16 +46,19 @@ A continuación, detallamos el modelo relacional correspondiente a nuestra BDD.
 %% unitarios
 
 \textbf{Persona} {\underline{dni}, nombre, apellido, fechaDeNacimiento, \
-	\dashuline{calleYnro}, \dashuline{provincia}, \dashuline{ciudad}}
+	\dashuline{idDomicilio}
 
-\textbf{Telefono} {\underline{numero}, \dashuline{dni}, \dashuline{idDepartamento}}
+\textbf{TelefonoPersona} {\underline{numero}, \dashuline{dniPersona}}
 
-\textbf{RolEnCaso} {\underline{idRol}, nombre}
+\textbf{TelefonoDepartamento} {\underline{numero}, \dashuline{idDepartamento}}
 
-\textbf{CategoriaCaso} {\underline{idCategoria}, nombre, cantidadDeCasos}
+\textbf{RolEnCaso} {\underline{idRol}, nombreRol}
+
+\textbf{CategoriaCaso} {\underline{idCategoria}, nombreCategoria, cantidadDeCasos}
 
 \textbf{OficialDePolicia} {\underline{dni}, numeroPlaca, fechaIngreso, 
-	numeroEscritorio, \dashuline{idRango}, \dashuline{idServicio}}
+	numeroEscritorio, \dashuline{idRango}, \dashuline{idServicio},
+	\dashuline{idDepartamento}}
 
 \textbf{Servicio} {\underline{idServicio}, nombre}
 
@@ -60,17 +69,18 @@ A continuación, detallamos el modelo relacional correspondiente a nuestra BDD.
 	\dashuline{idCategoria}, \dashuline{idInvestigadorPrincipal}, \
 	\dashuline{idInvestigadorResolvedor}}
 
-\textbf{EstadoCaso} {\underline{idEstado}, \dashuline{idCaso}}
+\textbf{EstadoCaso} {\underline{idEstado}, \dashuline{idCaso}, \
+	fecha}
 
-\textbf{Resuelto} {\underline{idEstado}, \ 	
+\textbf{Resuelto} {\underline{idEstado}, \dashuline{idCaso}, \ 	
 	descripcionResuelto}
 
-\textbf{Pendiente} {\underline{idEstado}}
+\textbf{Pendiente} {\underline{idEstado}, \dashuline{idCaso},}
 
-\textbf{Congelado} {\underline{idEstado}, \
+\textbf{Congelado} {\underline{idEstado}, \dashuline{idCaso}, \
 	fechaCongelado, comentario}
 
-\textbf{Descartado} {\underline{idEstado}, \
+\textbf{Descartado} {\underline{idEstado}, \dashuline{idCaso}, \
 	fechaDescartado, motivo}
 
 \textbf{Evento} {\underline{idEvento}, fechaOcurrio, horaOcurrio, descripcion} 
@@ -79,10 +89,17 @@ A continuación, detallamos el modelo relacional correspondiente a nuestra BDD.
 	fechaSellado, horaSellado, fechaIngreso, \dashuline{idCaso}, }
 
 \textbf{Departamento} {\underline{idDepartamento}, nombre, \dashuline{ \ 
-	idDepartamentoSupervisado}, \dashuline{calleYnro}, \dashuline{provincia}, \ 
-	\dashuline{ciudad}}
+	idDepartamentoSupervisor}, \dashuline{idDomicilio}}
 
-\textbf{Domicilio} {\underline{calleYnro}, \underline{provincia}, \underline{ciudad}}
+\textbf{Domicilio} {\underline{idDomicilio}, altura, piso, depto, \
+	\dashuline{idCalle}}
+
+\textbf{Calle} {\underline{idCalle}, nombreCalle, \dashuline{idCiudad}}
+
+\textbf{Ciudad} {\underline{idCiudad}, nombreCiudad, \dashuline{idProvincia}}
+
+\textbf{Provincia} {\underline{idProvincia}, nombreProvincia}
+
 
 %% relacions n:m
 \textbf{Culpable} {\underline{dni}, \underline{idCaso}}
@@ -96,13 +113,14 @@ A continuación, detallamos el modelo relacional correspondiente a nuestra BDD.
 \textbf{ParticipaEn} {\underline{dni}, \underline{idEvento}, \dashuline{ \
 	idCaso}}
 
-\textbf{PresentaTestimonio} {texto, hora, fecha, \underline{dniTestigo}, \
+\textbf{PresentaTestimonio} {texto, \underline{fecha}, \
+	\underline{dniTestigo}, \
 	\underline{idCaso}, \dashuline{dniOficial}}
 
 \textbf{Custodia} {\underline{idEvidencia}, \underline{dniOficial}, \
-	\dashuline{calleYnro}, \dashuline{provincia}, \dashuline{ciudad}}
+	\dashuline{idDomicilio}, comentario, hora, fecha, \dashuline{idCustodia}}
 
-
+%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Aclaraciones sobre las búsquedas}
 Las búsquedas solicitas en el enunciado se encuentran en el archivo adjunto busquedas.sql
