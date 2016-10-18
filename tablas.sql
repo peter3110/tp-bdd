@@ -1,3 +1,6 @@
+-- Borra TODAS las tablas y vuelve a crearlas
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
 
 -- Personas
 CREATE TABLE Personas
@@ -12,7 +15,7 @@ CREATE TABLE Personas
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (37206752, 'Pedro', 'Rodriguez', '1992-10-31', 1);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
-	VALUES (372111222, 'Juan', 'Pineda', '1992-04-28', 2);
+	VALUES (37273622, 'Lucas', 'Tavolaro', '1992-11-24', 2);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (40206752, 'Ignacio', 'Holzer', '1992-02-15', 3);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
@@ -24,7 +27,7 @@ INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (27333444, 'Lucia', 'Amor', '1992-10-29', 7);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
-	VALUES (20111222, 'Sofia', 'Rodriguez', '1992-09-21', 9);
+	VALUES (20111222, 'Sofia', 'Rodriguez', '1992-09-21', 8);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (20333444, 'Camila', 'Rodriguez', '1992-08-25', 9);
 
@@ -35,6 +38,10 @@ CREATE TABLE TelefonosPersonas
 	dniPersona INTEGER
 );
 
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (15491133, 37273622);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (1591005498, 98114259);
 INSERT INTO TelefonosPersonas (numero, dniPersona)
 	VALUES (1544009743, 37206752);
 INSERT INTO TelefonosPersonas (numero, dniPersona)
@@ -52,21 +59,27 @@ INSERT INTO TelefonosPersonas (numero, dniPersona)
 INSERT INTO TelefonosPersonas (numero, dniPersona)
 	VALUES (48484848, 20111222);
 INSERT INTO TelefonosPersonas (numero, dniPersona)
-	VALUES (48484848, 20333444);	
+	VALUES (48484848, 20333444);
 
 -- TelefonosDepartamentos
-CREATE TABLE TelefonosDepartamentos 
+CREATE TABLE TelefonosDepartamentos
 (
 	numero INTEGER PRIMARY KEY,
 	idDepartamento INTEGER
 );
 
-INSERT INTO TelefonosDepartamentos (numero, idDepartamento) 
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
 	VALUES (41414141, 1);
-INSERT INTO TelefonosDepartamentos (numero, idDepartamento) 
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
 	VALUES (40404040 2);
-INSERT INTO TelefonosDepartamentos (numero, idDepartamento) 
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
 	VALUES (442424242, 3);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
+	VALUES (47478888, 4);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
+	VALUES (43312866, 5);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
+	VALUES (45278108, 6);
 
 -- RolEnCaso
 CREATE TABLE RolEnCaso
@@ -75,11 +88,15 @@ CREATE TABLE RolEnCaso
 	nombreRol VARCHAR(20)
 );
 
-INSERT INTO RolEnCaso (idRol, nombreRol) 
+INSERT INTO RolEnCaso (idRol, nombreRol)
 	VALUES (1, 'Acusado');
+INSERT INTO RolEnCaso (idRol, nombreRol)
+	VALUES (2, 'Victima');
+INSERT INTO RolEnCaso (idRol, nombreRol)
+	VALUES (3, 'Testigo');
 
 -- CategoriaCaso
-CREATE TABLE CategoriasCasos 
+CREATE TABLE CategoriasCasos
 (
 	idCategoria INTEGER PRIMARY KEY,
 	nombreCategoria VARCHAR(20),
@@ -96,8 +113,8 @@ CREATE TABLE OficialDePolicia
 	numeroPlaca INTEGER,
 	fechaIngreso DATE,
 	numeroEscritorio INTEGER,
-	idRango INTEGER, 
-	idServicio INTEGER, 
+	idRango INTEGER,
+	idServicio INTEGER,
 	idDepartamento INTEGER
 );
 
@@ -105,7 +122,7 @@ INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, 
 	VALUES (20412312, 1111, '2015-10-10', 12, 1, 1, 1);
 
 -- Servicio
-CREATE TABLE Servicio 
+CREATE TABLE Servicio
 (
 	idServicio INTEGER PRIMARY KEY,
 	nombre VARCHAR(20)
@@ -174,13 +191,13 @@ CREATE TABLE Congelados
 (
 	idEstado INTEGER PRIMARY KEY,
 	idCaso INTEGER,
-	fechaCongelado DATE
+	fechaCongelado DATE,
 	comentario VARCHAR(200)
 );
 
 -- INSERT INTO Congelados ...
 
--- Descartados 
+-- Descartados
 CREATE TABLE Descartados
 (
 	idEstado INTEGER PRIMARY KEY,
@@ -202,7 +219,7 @@ CREATE TABLE Eventos
 
 -- INSERT INTO Eventos ...
 
--- Evidencia 
+-- Evidencia
 CREATE TABLE Evidencia
 (
 	idEvidencia INTEGER PRIMARY KEY,
@@ -210,7 +227,7 @@ CREATE TABLE Evidencia
 	horaEncuentro VARCHAR(20),
 	descripcion VARCHAR(200),
 	fechaSellado DATE,
-	horaSellado VARCHAR(20), 
+	horaSellado VARCHAR(20),
 	fechaIngreso DATE,
 	idCaso INTEGER
 );
@@ -218,10 +235,10 @@ CREATE TABLE Evidencia
 -- INSERT INTO Evidencia ...
 
 -- Departamento
-CREATE TABLE Departamento 
+CREATE TABLE Departamento
 (
 	idDepartamento INTEGER PRIMARY KEY,
-	nombre VARCHAR(20),
+	nombre VARCHAR(50),
 	idDepartamentoSupervisor INTEGER,
 	idDomicilio INTEGER
 );
@@ -234,14 +251,14 @@ CREATE TABLE Domicilios
 (
 	idDomicilio INTEGER PRIMARY KEY,
 	altura INTEGER,
-	piso INTEGER, 
-	depto VARCHAR('5'), 
+	piso INTEGER,
+	depto VARCHAR(5),
 	idCalle INTEGER
 );
 
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 	VALUES (1, 100, 1, 'B', 1);
-	
+
 -----------------
 -- Calles
 CREATE TABLE Calles
@@ -258,7 +275,7 @@ CREATE TABLE Ciudades
 	idProvincia INTEGER
 );
 -- Provincias
-CREATE TABLE Provincias 
+CREATE TABLE Provincias
 (
 	idProvincia INTEGER PRIMARY KEY,
 	nombreProvincia VARCHAR(20)
@@ -278,7 +295,7 @@ CREATE TABLE InvestigadoresAuxiliares
 	PRIMARY KEY (idCaso, dniOficialPolicia)
 );
 -- Involucra
-CREATE TABLE Involucra 
+CREATE TABLE Involucra
 (
 	dni INTEGER,
 	idCaso INTEGER,
@@ -299,7 +316,7 @@ CREATE TABLE PresentaTestimonio
 	texto VARCHAR(200),
 	fecha DATE,
 	dniTestigo INTEGER,
-	idCaso INTEGER, 
+	idCaso INTEGER,
 	dniOficial INTEGER,
 	PRIMARY KEY (fecha, dniTestigo, idCaso)
 );
