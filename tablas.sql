@@ -11,6 +11,22 @@ CREATE TABLE Personas
 
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (37206752, 'Pedro', 'Rodriguez', '1992-10-31', 1);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (372111222, 'Juan', 'Pineda', '1992-04-28', 2);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (40206752, 'Ignacio', 'Holzer', '1992-02-15', 3);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (40111222, 'Alan', 'Corti', '1992-11-22', 4);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (27206752, 'Lucas', 'Tavolaro', '1992-10-30', 5);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (27111222, 'Sebastian', 'Prillo', '1992-12-28', 6);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (27333444, 'Lucia', 'Amor', '1992-10-29', 7);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (20111222, 'Sofia', 'Rodriguez', '1992-09-21', 9);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (20333444, 'Camila', 'Rodriguez', '1992-08-25', 9);
 
 -- TelefonoPersona
 CREATE TABLE TelefonosPersonas
@@ -20,7 +36,23 @@ CREATE TABLE TelefonosPersonas
 );
 
 INSERT INTO TelefonosPersonas (numero, dniPersona)
-	VALUES (1544009743, 1);
+	VALUES (1544009743, 37206752);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (1544007192, 372111222);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (1553278965, 40206752);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (45678910, 40111222);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (49494949, 27206752);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (45454545, 27111222);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (47474747, 27333444);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (48484848, 20111222);
+INSERT INTO TelefonosPersonas (numero, dniPersona)
+	VALUES (48484848, 20333444);	
 
 -- TelefonosDepartamentos
 CREATE TABLE TelefonosDepartamentos 
@@ -30,7 +62,11 @@ CREATE TABLE TelefonosDepartamentos
 );
 
 INSERT INTO TelefonosDepartamentos (numero, idDepartamento) 
-	VALUES (47478888, 1);
+	VALUES (41414141, 1);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento) 
+	VALUES (40404040 2);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento) 
+	VALUES (442424242, 3);
 
 -- RolEnCaso
 CREATE TABLE RolEnCaso
