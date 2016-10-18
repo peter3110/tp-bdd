@@ -57,7 +57,7 @@ INSERT INTO TelefonosPersonas (numero, dniPersona)
 INSERT INTO TelefonosPersonas (numero, dniPersona)
 	VALUES (47474747, 27333444);
 INSERT INTO TelefonosPersonas (numero, dniPersona)
-	VALUES (48484848, 20111222);
+	VALUES (48122091, 20111222);
 INSERT INTO TelefonosPersonas (numero, dniPersona)
 	VALUES (48484848, 20333444);
 
@@ -71,7 +71,7 @@ CREATE TABLE TelefonosDepartamentos
 INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
 	VALUES (41414141, 1);
 INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
-	VALUES (40404040 2);
+	VALUES (40404040, 2);
 INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
 	VALUES (442424242, 3);
 INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
