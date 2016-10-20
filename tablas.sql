@@ -226,6 +226,12 @@ INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (2,2,'2016-05-11');
 INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (3,3,'2015-03-02');
 INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (4,4,'2016-10-10');
 INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (5,5,'2015-03-23');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (6, 1, '2014-10-10');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (7, 2, '2016-04-11');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (8, 3, '2015-01-19');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (9, 5, '2014-10-20');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (10, 1, '2014-10-13');
+
 
 -- Resueltos
 CREATE TABLE Resueltos
@@ -238,7 +244,7 @@ CREATE TABLE Resueltos
 INSERT INTO Resueltos (idEstado, idCaso, descripcionResuelto)
 	VALUES (1,1,'Fue encontrado el asaltante');
 INSERT INTO Resueltos (idEstado, idCaso, descripcionResuelto)
-	VALUES (2,5,'Se encontraron mas locales que realizaban actividades similares y fueron todos cerrados');
+	VALUES (5,5,'Se encontraron mas locales que realizaban actividades similares y fueron todos cerrados');
 
 -- Pendientes
 CREATE TABLE Pendientes
@@ -247,7 +253,11 @@ CREATE TABLE Pendientes
 	idCaso INTEGER
 );
 
-INSERT INTO Pendientes (idEstado, idCaso) VALUES (1,4);
+INSERT INTO Pendientes (idEstado, idCaso) VALUES (6,1);
+INSERT INTO Pendientes (idEstado, idCaso) VALUES (7,2);
+INSERT INTO Pendientes (idEstado, idCaso) VALUES (8,3);
+INSERT INTO Pendientes (idEstado, idCaso) VALUES (4,4);
+INSERT INTO Pendientes (idEstado, idCaso) VALUES (9,5);
 
 -- Congelados
 CREATE TABLE Congelados
@@ -259,7 +269,9 @@ CREATE TABLE Congelados
 );
 
 INSERT INTO Congelados (idEstado, idCaso, fechaCongelado, comentario)
-	VALUES (1, 3, '2016-02-04', 'No pudo ser identificado el asesino');
+	VALUES (3, 3, '2016-02-04', 'No pudo ser identificado el asesino');
+INSERT INTO Congelados (idEstado, idCaso, fechaCongelado, comentario)
+	VALUES (10, 1, '2014-10-13', 'Caso congelado hasta que existan novedades');
 
 -- Descartados
 CREATE TABLE Descartados
@@ -271,7 +283,7 @@ CREATE TABLE Descartados
 );
 
 INSERT INTO Descartados (idEstado, idCaso, fechaDescartado, motivo)
-	VALUES (1, 2, '2016-06-20', 'Imposible encontrar el dispositivo');
+	VALUES (2, 2, '2016-06-20', 'Imposible encontrar el dispositivo');
 
 -- Eventos
 CREATE TABLE Eventos
@@ -363,11 +375,11 @@ INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 	VALUES (10, 2000, 3, 'E', 1);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (11, 3000, 3, 'E', 2);	
+	VALUES (11, 3000, 3, 'E', 2);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 	VALUES (12, 2000, 3, 'E', 1);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (13, 3000, 3, 'E', 2);	
+	VALUES (13, 3000, 3, 'E', 2);
 -----------------
 -- Calles
 CREATE TABLE Calles
