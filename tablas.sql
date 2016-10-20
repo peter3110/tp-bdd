@@ -127,7 +127,7 @@ CREATE TABLE CategoriasCasos
 );
 
 INSERT INTO CategoriasCasos (idCategoria, nombreCategoria, cantidadDeCasos)
-	VALUES(1, 'Robo', 1);
+	VALUES(1, 'Robo', 2);
 
 INSERT INTO CategoriasCasos (idCategoria, nombreCategoria, cantidadDeCasos)
 	VALUES(2, 'Homicidio', 1);
