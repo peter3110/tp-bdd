@@ -80,6 +80,12 @@ INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
 	VALUES (43312866, 5);
 INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
 	VALUES (45278108, 6);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
+	VALUES (47611093, 7);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
+	VALUES (43333287, 8);
+INSERT INTO TelefonosDepartamentos (numero, idDepartamento)
+	VALUES (40142199, 9);
 
 -- RolEnCaso
 CREATE TABLE RolEnCaso
@@ -106,6 +112,15 @@ CREATE TABLE CategoriasCasos
 INSERT INTO CategoriasCasos (idCategoria, nombreCategoria, cantidadDeCasos)
 	VALUES(1, 'Robo', 1);
 
+INSERT INTO CategoriasCasos (idCategoria, nombreCategoria, cantidadDeCasos)
+	VALUES(2, 'Homicidio', 1);
+
+INSERT INTO CategoriasCasos (idCategoria, nombreCategoria, cantidadDeCasos)
+	VALUES(3, 'Venta Ilegal', 1);
+
+INSERT INTO CategoriasCasos (idCategoria, nombreCategoria, cantidadDeCasos)
+	VALUES(4, 'Lavado de dinero', 1);
+
 -- OficialDePolicia
 CREATE TABLE OficialDePolicia
 (
@@ -120,6 +135,14 @@ CREATE TABLE OficialDePolicia
 
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
 	VALUES (20412312, 1111, '2015-10-10', 12, 1, 1, 1);
+INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
+	VALUES (30115312, 2000, '2016-08-01', 4, 1, 1, 1);
+INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
+	VALUES (27438900, 280, '2013-03-10', 18, 1, 1, 1);
+INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
+	VALUES (25634932, 769, '2014-11-20', 12, 1, 1, 1);
+INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
+	VALUES (31293821, 2014, '2016-08-20', 7, 1, 1, 1);
 
 -- Servicio
 CREATE TABLE Servicio
@@ -138,7 +161,13 @@ CREATE TABLE Rangos
 	nombre VARCHAR(20)
 );
 
-INSERT INTO Rangos (idRango, nombre) VALUES (1, 'Rango 1');
+INSERT INTO Rangos (idRango, nombre) VALUES (1, 'Agenta');
+INSERT INTO Rangos (idRango, nombre) VALUES (2, 'Cabo');
+INSERT INTO Rangos (idRango, nombre) VALUES (3, 'Sargento ');
+INSERT INTO Rangos (idRango, nombre) VALUES (4, 'Suboficial');
+INSERT INTO Rangos (idRango, nombre) VALUES (5, 'Inspector');
+INSERT INTO Rangos (idRango, nombre) VALUES (6, 'Comisario');
+
 
 -- CasosCriminales
 CREATE TABLE CasosCriminales
@@ -155,7 +184,15 @@ CREATE TABLE CasosCriminales
 );
 
 INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
-	VALUES (1, '2014-09-09', '14:00 hs', 'en una casa', 'un robo siniestro', '2014-10-10', 1, 1, 1);
+	VALUES (1, '2014-09-09', '14:00 hs', 'en una casa', 'un robo siniestro', '2014-10-10', 1, -1, -1);
+INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
+	VALUES (2, '2016-04-10', '08:22 hs', 'en la calle', 'robo de celular', '2016-04-11', 1, -1, -1);
+INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
+	VALUES (3, '2015-01-19', '02:15 hs', 'en la calle', 'se encotró una persona asesinada', '2015-01-19', 2, -1, -1);
+INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
+	VALUES (4, '2016-10-09', '16:10 hs', 'en un local', 'se encontró venta de animales ilegales', '2016-10-09', 3, -1, -1);
+INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
+	VALUES (5, '2014-10-19', '20:00 hs', 'en un local', 'venta ilegal de dolares', '2014-10-20', 4, -1, -1);
 
 -- EstadosCasos
 CREATE TABLE EstadosCasos
@@ -165,7 +202,11 @@ CREATE TABLE EstadosCasos
 	fecha DATE
 );
 
-INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (1,1,'2014-10-10');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (1,1,'2014-10-20');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (2,2,'2016-05-11');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (3,3,'2015-03-02');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (4,4,'2016-10-10');
+INSERT INTO EstadosCasos (idEstado, idCaso, fecha) VALUES (5,5,'2015-03-23');
 
 -- Resueltos
 CREATE TABLE Resueltos
@@ -175,7 +216,10 @@ CREATE TABLE Resueltos
 	descripcionResuelto VARCHAR(200)
 );
 
--- INSERT INTO Resueltos ...\
+INSERT INTO Resueltos (idEstado, idCaso, descripcionResuelto)
+	VALUES (1,1,'Fue encontrado el asaltante');
+INSERT INTO Resueltos (idEstado, idCaso, descripcionResuelto)
+	VALUES (2,5,'Se encontraron mas locales que realizaban actividades similares y fueron todos cerrados');
 
 -- Pendientes
 CREATE TABLE Pendientes
@@ -184,7 +228,7 @@ CREATE TABLE Pendientes
 	idCaso INTEGER
 );
 
-INSERT INTO Pendientes (idEstado, idCaso) VALUES (1,1);
+INSERT INTO Pendientes (idEstado, idCaso) VALUES (1,4);
 
 -- Congelados
 CREATE TABLE Congelados
@@ -195,7 +239,8 @@ CREATE TABLE Congelados
 	comentario VARCHAR(200)
 );
 
--- INSERT INTO Congelados ...
+INSERT INTO Congelados (idEstado, idCaso, fechaCongelado, comentario)
+	VALUES (1, 3, '2016-02-04', 'No pudo ser identificado el asesino');
 
 -- Descartados
 CREATE TABLE Descartados
@@ -206,7 +251,8 @@ CREATE TABLE Descartados
 	motivo VARCHAR(200)
 );
 
--- INSERT INTO Descartados ...
+INSERT INTO Descartados (idEstado, idCaso, fechaDescartado, motivo)
+	VALUES (1, 2, '2016-06-20', 'Imposible encontrar el dispositivo');
 
 -- Eventos
 CREATE TABLE Eventos
@@ -217,7 +263,16 @@ CREATE TABLE Eventos
 	descripcion VARCHAR(200)
 );
 
--- INSERT INTO Eventos ...
+INSERT INTO Eventos (idEvento, fechaOcurrio, horaOcurrio, descripcion)
+	VALUES (1, '2016-05-01', '18:45', 'La compañia de telefono respondió el pedido de información');
+INSERT INTO Eventos (idEvento, fechaOcurrio, horaOcurrio, descripcion)
+	VALUES (2, '2016-06-01', '07:05', 'No se encontró actividad del celular por un mes');
+INSERT INTO Eventos (idEvento, fechaOcurrio, horaOcurrio, descripcion)
+	VALUES (3, '2015-02-15', '11:15', 'Fue reconocida la persona');
+INSERT INTO Eventos (idEvento, fechaOcurrio, horaOcurrio, descripcion)
+	VALUES (4, '2015-02-28', '15:00', 'No se encontraron rastros del sospechoso en la persona');
+INSERT INTO Eventos (idEvento, fechaOcurrio, horaOcurrio, descripcion)
+	VALUES (5, '2014-11-10', '17:20', 'Se registraron negocios cercanos con los que se habían hecho transacciones');
 
 -- Evidencia
 CREATE TABLE Evidencia
@@ -232,7 +287,8 @@ CREATE TABLE Evidencia
 	idCaso INTEGER
 );
 
--- INSERT INTO Evidencia ...
+INSERT INTO Evidencia (idEvidencia, fechaEncuentro, horaEncuentro, descripcion, fechaSellado, horaSellado, fechaIngreso, idCaso)
+	VALUES (1, '2014-10-28', '10:00', 'libro de actas', '2014-10-28', '15:00', '2014-10-29', 5);
 
 -- Departamento
 CREATE TABLE Departamento
