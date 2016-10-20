@@ -20,7 +20,7 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 				SELECT p1.dni FROM Personas p1
 					WHERE p1.idDomicilio = dom2.idDomicilio AND
 					p1.dni IN (
-						SELECT i.dni FROM Involucra i 
+						SELECT i.dni FROM Involucra i
 							JOIN RolEnCaso rc ON i.idRol = rc.idRol
 							WHERE rc.nombreRol = 'Acusado'
 					) AND EXISTS (
@@ -35,7 +35,7 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 -- Oficiales que participaron en la cadena de custodia de evidencias para más de un caso
 SELECT * FROM OficialDePolicia Op
 	WHERE (
-		SELECT 
+		SELECT
 	) > 1;
 
 -- La sucesión de eventos de personas involucradas en un caso
@@ -47,16 +47,14 @@ SELECT * FROM OficialDePolicia Op
 -- La lista de oficiales involucrados en un caso
 
 -- Las categorías de casos ordenadas por cantidad de casos
+SELECT * FROM CategoriasCasos cc
+  SELECT COUNT(*) FROM CasosCriminales ca WHERE ca.idCatagoria = cc.idCategoria
+ORDER_BY count de mayor a menor
 
 -- Todos los testimonios de un caso dado
+SELECT * FROM CasosCriminales cc WHERE cc.idCaso = 5
 
 --Para una categoría en particular listar, para cada uno de los casos, los testimonios asociados
-
-
-
-
-
-
-
-
-
+SELECT * FROM CasosCriminales cc
+  JOIN PresentaTestimonio pt ON pt.idCaso = cc.idCaso
+WHERE cc.idCategoria = 'Robo';
