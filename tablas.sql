@@ -22,6 +22,7 @@ INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (40111222, 'Alan', 'Corti', '1992-11-22', 4);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (27206752, 'Lucas', 'Tavolaro', '1992-10-30', 5);
+
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (27111222, 'Sebastian', 'Prillo', '1992-12-28', 6);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
@@ -31,6 +32,21 @@ INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (20333444, 'Camila', 'Rodriguez', '1992-08-25', 9);
 
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (30303030, 'Camila', 'Rodolico', '1992-08-25', 10);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (40404040, 'Gustavo', 'Rodolico', '2000-08-25', 10);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (50505050, 'Camila', 'Rodolico', '1992-08-25', 10);
+
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (60606060, 'Ricardo', 'Arjona', '1950-08-25', 11);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (60606060, 'Analia', 'Arjona', '1990-08-25', 11);
+INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
+	VALUES (60606060, 'Maria', 'Arjona', '1955-08-25', 11);
+
+
 -- TelefonoPersona
 CREATE TABLE TelefonosPersonas
 (
@@ -38,6 +54,7 @@ CREATE TABLE TelefonosPersonas
 	dniPersona INTEGER
 );
 
+-- Hay personas que no tienen numero de telefono
 INSERT INTO TelefonosPersonas (numero, dniPersona)
 	VALUES (15491133, 37273622);
 INSERT INTO TelefonosPersonas (numero, dniPersona)
@@ -329,8 +346,28 @@ INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 	VALUES (2, 1678, 0, 'PB', 2);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (3, 2000, 3, 'E', 3);
+	VALUES (3, 3000, 3, 'E', 3);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (4, 4000, 3, 'E', 3);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (5, 5000, 3, 'E', 3);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (6, 6000, 3, 'E', 3);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (7, 7000, 3, 'E', 3);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (8, 8000, 3, 'E', 3);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (9, 9000, 3, 'E', 3);
 
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (10, 2000, 3, 'E', 1);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (11, 3000, 3, 'E', 2);	
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (12, 2000, 3, 'E', 1);
+INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
+	VALUES (13, 3000, 3, 'E', 2);	
 -----------------
 -- Calles
 CREATE TABLE Calles
@@ -416,6 +453,9 @@ CREATE TABLE Involucra
 	idRol INTEGER,
 	PRIMARY KEY (dni, idCaso)
 );
+INSERT INTO Involucra ()
+
+
 -- ParticipaEn
 CREATE TABLE ParticipaEn
 (
