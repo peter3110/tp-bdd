@@ -183,7 +183,7 @@ CREATE TABLE Rangos
 INSERT INTO Rangos (idRango, nombre) VALUES (1, 'Agente');
 INSERT INTO Rangos (idRango, nombre) VALUES (2, 'Cabo');
 INSERT INTO Rangos (idRango, nombre) VALUES (3, 'Sargento ');
-INSERT INTO Rangos (idRango, nombre) VALUES (4, 'Suboficial');
+INSERT INTO Rangos (idRango, nombre) VALUES (4, 'Oficial');
 INSERT INTO Rangos (idRango, nombre) VALUES (5, 'Inspector');
 INSERT INTO Rangos (idRango, nombre) VALUES (6, 'Comisario');
 
