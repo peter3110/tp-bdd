@@ -17,8 +17,8 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 	WHERE dom.idDomicilio IN
 		(SELECT idDomicilio FROM Domicilios dom2
 			WHERE (
-				SELECT * FROM Personas p
-					JOIN Involucra i ON i.dni = p2.dni 
+				SELECT COUNT(*) FROM Personas p
+					JOIN Involucra i ON i.dni = p.dni 
 					JOIN RolEnCaso rc ON rc.idRol = i.idRol
 				WHERE p.idDomicilio = dom2.idDomicilio AND
 					  rc.nombreRol = 'Acusado'
@@ -27,7 +27,10 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 		);
 
 -- Oficiales que participaron en la cadena de custodia de evidencias para más de un caso
-SELECT * FROM 
+SELECT * FROM OficialDePolicia Op
+	WHERE (
+		SELECT 
+	) > 1;
 
 -- La sucesión de eventos de personas involucradas en un caso
 
