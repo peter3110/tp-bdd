@@ -42,9 +42,9 @@ INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (60606060, 'Ricardo', 'Arjona', '1950-08-25', 11);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
-	VALUES (60606060, 'Analia', 'Arjona', '1990-08-25', 11);
+	VALUES (63123443, 'Analia', 'Arjona', '1990-08-25', 11);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
-	VALUES (60606060, 'Maria', 'Arjona', '1955-08-25', 11);
+	VALUES (63791190, 'Maria', 'Arjona', '1955-08-25', 11);
 
 
 -- TelefonoPersona
@@ -321,7 +321,7 @@ CREATE TABLE Evidencia
 INSERT INTO Evidencia (idEvidencia, fechaEncuentro, horaEncuentro, descripcion, fechaSellado, horaSellado, fechaIngreso, idCaso)
 	VALUES (1, '2014-10-28', '10:00', 'libro de actas', '2014-10-28', '15:00', '2014-10-29', 5);
 INSERT INTO Evidencia (idEvidencia, fechaEncuentro, horaEncuentro, descripcion, fechaSellado, horaSellado, fechaIngreso, idCaso)
-	VALUES (2, '2014-11-04', '13:10', 'libro de actas de otro local', '2014-11-05', '06:00', '2014-10-05', 5);
+	VALUES (2, '2014-11-04', '13:10', 'libro de actas de otro local', '2014-11-05', '06:00', '2014-11-05', 5);
 INSERT INTO Evidencia (idEvidencia, fechaEncuentro, horaEncuentro, descripcion, fechaSellado, horaSellado, fechaIngreso, idCaso)
 	VALUES (3, '2015-01-19', '20:45', 'pertenencias de la persona', '2014-01-20', '12:30', '2014-01-21', 3);
 INSERT INTO Evidencia (idEvidencia, fechaEncuentro, horaEncuentro, descripcion, fechaSellado, horaSellado, fechaIngreso, idCaso)
@@ -451,7 +451,7 @@ CREATE TABLE InvestigadoresAuxiliares
 );
 
 INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
-	VALUES (3, 27206752);
+	VALUES (5, 27206752);
 INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
 	VALUES (4, 27206752);
 INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
@@ -465,8 +465,17 @@ CREATE TABLE Involucra
 	idRol INTEGER,
 	PRIMARY KEY (dni, idCaso)
 );
-INSERT INTO Involucra ()
 
+INSERT INTO Involucra (dni, idCaso, idRol)
+	VALUES (27111222, 1, 1);
+INSERT INTO Involucra (dni, idCaso, idRol)
+	VALUES (27333444, 2, 1);
+INSERT INTO Involucra (dni, idCaso, idRol)
+	VALUES (20111222, 3, 2);
+INSERT INTO Involucra (dni, idCaso, idRol)
+	VALUES (20333444, 4, 2);
+INSERT INTO Involucra (dni, idCaso, idRol)
+	VALUES (30303030, 5, 3);
 
 -- ParticipaEn
 CREATE TABLE ParticipaEn
@@ -476,6 +485,18 @@ CREATE TABLE ParticipaEn
 	idCaso INTEGER,
 	PRIMARY KEY (dni, idEvento)
 );
+
+INSERT INTO ParticipaEn (dni, idEvento, idCaso)
+	VALUES (40404040, 1, 2);
+INSERT INTO ParticipaEn (dni, idEvento, idCaso)
+	VALUES (40404040, 2, 2);
+INSERT INTO ParticipaEn (dni, idEvento, idCaso)
+	VALUES (50505050, 3, 3);
+INSERT INTO ParticipaEn (dni, idEvento, idCaso)
+	VALUES (60606060, 4, 3);
+INSERT INTO ParticipaEn (dni, idEvento, idCaso)
+	VALUES (50505050, 5, 5);
+
 -- PresentaTestimonio
 CREATE TABLE PresentaTestimonio
 (
@@ -486,6 +507,12 @@ CREATE TABLE PresentaTestimonio
 	dniOficial INTEGER,
 	PRIMARY KEY (fecha, dniTestigo, idCaso)
 );
+
+INSERT INTO PresentaTestimonio (texto, fecha, dniTestigo, idCaso, dniOficial)
+	VALUES ('el dueño del negocio declara', '2014-11-20', 63123443, 5, 37206752);
+INSERT INTO PresentaTestimonio (texto, fecha, dniTestigo, idCaso, dniOficial)
+	VALUES ('el policia que vio el hecho declara', '2015-01-25', 37206752, 5, 40111222);
+
 -- Custodia
 CREATE TABLE Custodia
 (
@@ -498,3 +525,10 @@ CREATE TABLE Custodia
 	idCustodia INTEGER,
 	PRIMARY KEY (idEvidencia, dniOficial, idCustodia)
 );
+
+INSERT INTO Custodia (idEvidencia, dniOficial, idDomicilio, comentario, hora, fecha, idCustodia)
+	VALUES (1, 37206752, 2, 'dejado el libro de actas en la comisaria mas cercana', '10:00', '2014-10-29', 1);
+INSERT INTO Custodia (idEvidencia, dniOficial, idDomicilio, comentario, hora, fecha, idCustodia)
+	VALUES (1, 37206752, 1, 'movido al lugar de trabajo', '08:00', '2014-11-01', 2);
+INSERT INTO Custodia (idEvidencia, dniOficial, idDomicilio, comentario, hora, fecha, idCustodia)
+	VALUES (2, 27206752, 3, 'bajo custodio el libro de otro local', '9:45', '2014-11-05', 3);
