@@ -16,14 +16,20 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 	JOIN Provincias prov ON prov.idProvincia = ciu.idProvincia
 	WHERE dom.idDomicilio IN
 		(SELECT idDomicilio FROM Domicilios dom2
-			WHERE (
-				SELECT COUNT(*) FROM Personas p
-					JOIN Involucra i ON i.dni = p.dni 
-					JOIN RolEnCaso rc ON rc.idRol = i.idRol
-				WHERE p.idDomicilio = dom2.idDomicilio AND
-					  rc.nombreRol = 'Acusado'
-				GROUP BY i.idCaso
-			) > 1
+			WHERE EXISTS(
+				SELECT p1.dni FROM Personas p1
+					WHERE p1.idDomicilio = dom2.idDomicilio AND
+					p1.dni IN (
+						SELECT i.dni FROM Involucra i 
+							JOIN RolEnCaso rc ON i.idRol = rc.idRol
+							WHERE rc.nombreRol = 'Acusado'
+					) AND EXISTS (
+						SELECT i2.dni FROM Involucra i2
+							JOIN RolEnCaso rc2 ON i2.idRol = rc2.idRol
+							WHERE rc.nombreRol = 'Acusado' AND
+								  i2.dni != i.dni
+					)
+			)
 		);
 
 -- Oficiales que participaron en la cadena de custodia de evidencias para más de un caso
@@ -45,3 +51,12 @@ SELECT * FROM OficialDePolicia Op
 -- Todos los testimonios de un caso dado
 
 --Para una categoría en particular listar, para cada uno de los casos, los testimonios asociados
+
+
+
+
+
+
+
+
+
