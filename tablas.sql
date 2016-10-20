@@ -134,25 +134,27 @@ CREATE TABLE OficialDePolicia
 );
 
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
-	VALUES (37206752, 1111, '2015-10-10', 12, 1, 1, 1);
+	VALUES (37206752, 1111, '2015-10-10', 12, 2, 1, 1);
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
 	VALUES (37273622, 2000, '2016-08-01', 4, 1, 1, 1);
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
-	VALUES (40206752, 280, '2013-03-10', 18, 1, 1, 1);
+	VALUES (40206752, 280, '2013-03-10', 18, 6, 2, 2);
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
-	VALUES (40111222, 769, '2014-11-20', 12, 1, 1, 1);
+	VALUES (40111222, 769, '2014-11-20', 12, 4, 2, 3);
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
-	VALUES (27206752, 2014, '2016-08-20', 7, 1, 1, 1);
+	VALUES (27206752, 2014, '2016-08-20', 7, 1, 4, 3);
 
 -- Servicio
 CREATE TABLE Servicio
 (
 	idServicio INTEGER PRIMARY KEY,
-	nombre VARCHAR(20)
+	nombre VARCHAR(100)
 );
 
-INSERT INTO Servicio (idServicio, nombre)
-	VALUES (1, 'Servicio 1');
+INSERT INTO Servicio (idServicio, nombre) VALUES (1, 'Via publica');
+INSERT INTO Servicio (idServicio, nombre) VALUES (2, 'Emergencia');
+INSERT INTO Servicio (idServicio, nombre) VALUES (3, 'Desastres');
+INSERT INTO Servicio (idServicio, nombre) VALUES (4, 'Busqueda y Rescate');
 
 -- Rangos
 CREATE TABLE Rangos
@@ -184,15 +186,15 @@ CREATE TABLE CasosCriminales
 );
 
 INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
-	VALUES (1, '2014-09-09', '14:00 hs', 'en una casa', 'un robo siniestro', '2014-10-10', 1, -1, -1);
+	VALUES (1, '2014-09-09', '14:00 hs', 'en una casa', 'un robo siniestro', '2014-10-10', 1, 37206752, 40206752);
 INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
-	VALUES (2, '2016-04-10', '08:22 hs', 'en la calle', 'robo de celular', '2016-04-11', 1, -1, -1);
+	VALUES (2, '2016-04-10', '08:22 hs', 'en la calle', 'robo de celular', '2016-04-11', 1, 37273622, 37206752);
 INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
-	VALUES (3, '2015-01-19', '02:15 hs', 'en la calle', 'se encotró una persona asesinada', '2015-01-19', 2, -1, -1);
+	VALUES (3, '2015-01-19', '02:15 hs', 'en la calle', 'se encotró una persona asesinada', '2015-01-19', 2, 40206752, 40111222);
 INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
-	VALUES (4, '2016-10-09', '16:10 hs', 'en un local', 'se encontró venta de animales ilegales', '2016-10-09', 3, -1, -1);
+	VALUES (4, '2016-10-09', '16:10 hs', 'en un local', 'se encontró venta de animales ilegales', '2016-10-09', 3, 40206752, 37273622);
 INSERT INTO CasosCriminales (idCaso, fechaOcurrio, horaOcurrio, lugarOcurrio, descripcion, fechaIngreso, idCategoria, idInvestigadorPrincipal, idInvestigadorResolvedor)
-	VALUES (5, '2014-10-19', '20:00 hs', 'en un local', 'venta ilegal de dolares', '2014-10-20', 4, -1, -1);
+	VALUES (5, '2014-10-19', '20:00 hs', 'en un local', 'venta ilegal de dolares', '2014-10-20', 4, 37206752, 40111222);
 
 -- EstadosCasos
 CREATE TABLE EstadosCasos
@@ -308,9 +310,9 @@ CREATE TABLE Departamento
 INSERT INTO Departamento (idDepartamento, nombre, idDepartamentoSupervisor, idDomicilio)
 	VALUES (1,'Departamento de policia Almagro', null, 1);
 INSERT INTO Departamento (idDepartamento, nombre, idDepartamentoSupervisor, idDomicilio)
-	VALUES (2,'Departamento de policia Nuñez', null, 2);
+	VALUES (2,'Departamento de policia Nuñez', 1, 2);
 INSERT INTO Departamento (idDepartamento, nombre, idDepartamentoSupervisor, idDomicilio)
-	VALUES (3,'Departamento de policia Barracas', null, 3);
+	VALUES (3,'Departamento de policia Barracas', 2, 3);
 
 -- Domicilios
 CREATE TABLE Domicilios
@@ -400,17 +402,11 @@ CREATE TABLE InvestigadoresAuxiliares
 );
 
 INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
-	VALUES (1, 27438900);
+	VALUES (3, 27206752);
 INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
-	VALUES (2, 27438900);
+	VALUES (4, 27206752);
 INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
-	VALUES (3, 30115312);
-INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
-	VALUES (3, 20412312);
-INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
-	VALUES (4, 25634932);
-INSERT INTO InvestigadoresAuxiliares (idCaso, dniOficialPolicia)
-	VALUES (5, 31293821);
+	VALUES (4, 37206752);
 
 -- Involucra
 CREATE TABLE Involucra
