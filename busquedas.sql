@@ -1,10 +1,33 @@
 -- Busquedas
 
 -- Datos de las personas que fueron sospechosas
+SELECT * FROM Personas p
+	WHERE p.dni IN (
+		SELECT dni FROM Involucra i
+			JOIN RolEnCaso rc ON i.idRol = rc.idRol
+			WHERE rc.nombreRol = 'Acusado'
+	);
+
 
 -- Direcciones donde convivieron personas sospechosas de diferentes casos
+SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.piso, dom.depto FROM Domicilios dom
+	JOIN Calles ca ON dom.idCalle = ca.idCalle
+	JOIN Ciudades ciu ON ciu.idCiudad = ca.idCiudad
+	JOIN Provincias prov ON prov.idProvincia = ciu.idProvincia
+	WHERE dom.idDomicilio IN
+		(SELECT idDomicilio FROM Domicilios dom2
+			WHERE (
+				SELECT * FROM Personas p
+					JOIN Involucra i ON i.dni = p2.dni 
+					JOIN RolEnCaso rc ON rc.idRol = i.idRol
+				WHERE p.idDomicilio = dom2.idDomicilio AND
+					  rc.nombreRol = 'Acusado'
+				GROUP BY i.idCaso
+			) > 1
+		);
 
 -- Oficiales que participaron en la cadena de custodia de evidencias para más de un caso
+SELECT * FROM 
 
 -- La sucesión de eventos de personas involucradas en un caso
 
