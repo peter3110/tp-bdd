@@ -26,8 +26,8 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 					) AND EXISTS (
 						SELECT i2.dni FROM Involucra i2
 							JOIN RolEnCaso rc2 ON i2.idRol = rc2.idRol
-							WHERE rc.nombreRol = 'Acusado' AND
-								  i2.dni != i.dni
+							WHERE rc2.nombreRol = 'Acusado' AND
+								  i2.dni != i2.dni
 					)
 			)
 		);
