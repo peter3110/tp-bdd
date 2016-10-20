@@ -360,17 +360,17 @@ INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 	VALUES (3, 3000, 3, 'E', 3);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (4, 4000, 3, 'E', 3);
+	VALUES (4, 4000, 5, 'A', 3);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (5, 5000, 3, 'E', 3);
+	VALUES (5, 5000, 0, 'PB', 3);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (6, 6000, 3, 'E', 3);
+	VALUES (6, 6010, 2, 'A', 3);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (7, 7000, 3, 'E', 3);
+	VALUES (7, 7120, 3, 'E', 2);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (8, 8000, 3, 'E', 3);
+	VALUES (8, 8000, 3, 'E', 1);
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
-	VALUES (9, 9000, 3, 'E', 3);
+	VALUES (9, 9000, 8, 'H', 3);
 
 INSERT INTO Domicilios (idDomicilio, altura, piso, depto, idCalle)
 	VALUES (10, 2000, 3, 'E', 1);
