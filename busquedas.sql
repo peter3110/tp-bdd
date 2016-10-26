@@ -33,26 +33,56 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 		);
 
 -- Oficiales que participaron en la cadena de custodia de evidencias para más de un caso
-SELECT * FROM OficialDePolicia Op
+SELECT op.dni, op.numeroPlaca FROM OficialDePolicia op
 	WHERE (
-		SELECT
+		SELECT COUNT(*) FROM Custodia cust
+		WHERE cust.dniOficial = op.dni
+		GROUP BY cust.dniOficial
 	) > 1;
 
 -- La sucesión de eventos de personas involucradas en un caso
+SELECT e.idEvento, e.fechaOcurrio, e.horaOcurrio, e.descripcion, pe.dni FROM Eventos e 
+	JOIN ParticipaEn pe ON e.idEvento = pe.idEvento
+	WHERE pe.idCaso = 2
+ORDER BY (pe.dni, e.fechaOcurrio, e.horaOcurrio) DESC;
 
 -- Un ranking de oficiales exitosos, es decir los que cerraron mayor cantidad de casos (resueltos)
+SELECT op.dni, COUNT(*) AS cantResueltos FROM OficialDePolicia op
+	JOIN CasosCriminales cc ON cc.idInvestigadorResolvedor = op.dni
+GROUP BY op.dni
+ORDER BY cantResueltos DESC;
 
 -- Las ubicaciones de todas las evidencias de un caso
+SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.piso, dom.depto FROM Domicilios dom
+	JOIN Calles ca ON dom.idCalle = ca.idCalle
+	JOIN Ciudades ciu ON ciu.idCiudad = ca.idCiudad
+	JOIN Provincias prov ON prov.idProvincia = ciu.idProvincia
+	WHERE dom.idDomicilio IN
+		(SELECT c.idDomicilio FROM Custodia c
+			 JOIN Evidencia e on c.idEvidencia = e.idEvidencia
+		 WHERE e.idCaso = 5
+			 AND NOT EXISTS (
+			  	 SELECT * FROM Custodia c2 
+			  	 WHERE c2.idEvidencia = c.idEvidencia AND
+			  	  	   c2.fecha > c.fecha
+			 )
+		);
 
--- La lista de oficiales involucrados en un caso
+-- La lista de oficiales involucrados en un caso 
+-- FALTA HACER QUE OFICIALES DE POLICIA SE INVOLUCREN CON ALGUN ROL EN CADA CASO
+SELECT * FROM OficialDePolicia op 
+	WHERE op.dni IN (
+		SELECT i.dni FROM Involucra i 
+		WHERE i.idCaso = 3
+	);
 
 -- Las categorías de casos ordenadas por cantidad de casos
-SELECT * FROM CategoriasCasos cc
-  SELECT COUNT(*) FROM CasosCriminales ca WHERE ca.idCatagoria = cc.idCategoria
-ORDER_BY count de mayor a menor
+SELECT nombreCategoria FROM CategoriasCasos ORDER BY cantidadDeCasos;
 
 -- Todos los testimonios de un caso dado
-SELECT * FROM CasosCriminales cc WHERE cc.idCaso = 5
+SELECT pt.texto FROM PresentaTestimonio pt
+	JOIN CasosCriminales cc ON pt.idCaso = cc.idCaso
+	WHERE cc.idCaso = 5;
 
 --Para una categoría en particular listar, para cada uno de los casos, los testimonios asociados
 SELECT * FROM CasosCriminales cc
