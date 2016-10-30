@@ -10,6 +10,7 @@ SELECT * FROM Personas p
 
 
 -- Direcciones donde convivieron personas sospechosas de diferentes casos
+-- TODO: Da 0 results. ARREGLAR
 SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.piso, dom.depto FROM Domicilios dom
 	JOIN Calles ca ON dom.idCalle = ca.idCalle
 	JOIN Ciudades ciu ON ciu.idCiudad = ca.idCiudad
@@ -41,7 +42,7 @@ SELECT op.dni, op.numeroPlaca FROM OficialDePolicia op
 	) > 1;
 
 -- La sucesión de eventos de personas involucradas en un caso
-SELECT e.idEvento, e.fechaOcurrio, e.horaOcurrio, e.descripcion, pe.dni FROM Eventos e 
+SELECT e.idEvento, e.fechaOcurrio, e.horaOcurrio, e.descripcion, pe.dni FROM Eventos e
 	JOIN ParticipaEn pe ON e.idEvento = pe.idEvento
 	WHERE pe.idCaso = 2
 ORDER BY (pe.dni, e.fechaOcurrio, e.horaOcurrio) DESC;
@@ -62,17 +63,18 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 			 JOIN Evidencia e on c.idEvidencia = e.idEvidencia
 		 WHERE e.idCaso = 5
 			 AND NOT EXISTS (
-			  	 SELECT * FROM Custodia c2 
+			  	 SELECT * FROM Custodia c2
 			  	 WHERE c2.idEvidencia = c.idEvidencia AND
 			  	  	   c2.fecha > c.fecha
 			 )
 		);
 
--- La lista de oficiales involucrados en un caso 
+-- La lista de oficiales involucrados en un caso
 -- FALTA HACER QUE OFICIALES DE POLICIA SE INVOLUCREN CON ALGUN ROL EN CADA CASO
-SELECT * FROM OficialDePolicia op 
+-- TODO: Da 0 results. ARREGLAR
+SELECT * FROM OficialDePolicia op
 	WHERE op.dni IN (
-		SELECT i.dni FROM Involucra i 
+		SELECT i.dni FROM Involucra i
 		WHERE i.idCaso = 3
 	);
 
@@ -85,6 +87,7 @@ SELECT pt.texto FROM PresentaTestimonio pt
 	WHERE cc.idCaso = 5;
 
 --Para una categoría en particular listar, para cada uno de los casos, los testimonios asociados
+-- TODO: Da 0 results. ARREGLAR
 SELECT * FROM CasosCriminales cc
   JOIN PresentaTestimonio pt ON pt.idCaso = cc.idCaso
-WHERE cc.idCategoria = 'Robo';
+WHERE cc.idCategoria = 1;
