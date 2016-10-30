@@ -471,7 +471,7 @@ CREATE TABLE Involucra
 INSERT INTO Involucra (dni, idCaso, idRol)
 	VALUES (27111222, 1, 1);
 INSERT INTO Involucra (dni, idCaso, idRol)
-	VALUES (27333444, 2, 1);
+	VALUES (27206752, 2, 1);
 INSERT INTO Involucra (dni, idCaso, idRol)
 	VALUES (20111222, 3, 2);
 INSERT INTO Involucra (dni, idCaso, idRol)

@@ -70,12 +70,10 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 		);
 
 -- La lista de oficiales involucrados en un caso
--- FALTA HACER QUE OFICIALES DE POLICIA SE INVOLUCREN CON ALGUN ROL EN CADA CASO
--- TODO: Da 0 results. ARREGLAR
 SELECT * FROM OficialDePolicia op
 	WHERE op.dni IN (
 		SELECT i.dni FROM Involucra i
-		WHERE i.idCaso = 3
+		WHERE i.idCaso = 2
 	);
 
 -- Las categorías de casos ordenadas por cantidad de casos
@@ -87,7 +85,7 @@ SELECT pt.texto FROM PresentaTestimonio pt
 	WHERE cc.idCaso = 5;
 
 --Para una categoría en particular listar, para cada uno de los casos, los testimonios asociados
--- TODO: Da 0 results. ARREGLAR
+-- TODO: Revisar si esta bien como se ve el resultado
 SELECT * FROM CasosCriminales cc
   JOIN PresentaTestimonio pt ON pt.idCaso = cc.idCaso
-WHERE cc.idCategoria = 1;
+WHERE cc.idCategoria = 4;
