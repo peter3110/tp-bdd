@@ -126,8 +126,15 @@ A continuación, detallamos el modelo relacional correspondiente a nuestra BDD.
 
 %%%%%%%%%%%%%%%%%%%%%%
 
-\section{Aclaraciones sobre las búsquedas}
-Las búsquedas solicitas en el enunciado se encuentran en el archivo adjunto busquedas.sql
+\section{Base de datos y búsquedas}
+
+Decidimos utilizar Postgres como motor para poder cargar las tablas y ejecutar las busquedas. En tablas.sql se encuentran las instrucciones para crear la tabla. Notar que en las primeras lineas del SQL se borran todos los schemas que fueron creados con el usuario que este ejecutando la instrucci\'on. Para crear la tabla simplemente hay que hacer:
+
+\begin{verbatim}
+psql < tablas.sql
+\end{verbatim}
+
+Las búsquedas solicitas en el enunciado se encuentran en el archivo busquedas.sql, en donde aclaramos en los comentarios de que busqueda se trata cada bloque de c\'odigo.
 
 %
 %
