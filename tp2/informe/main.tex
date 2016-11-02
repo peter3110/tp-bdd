@@ -1,0 +1,139 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=1.5cm]{geometry}
+%
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{ulem}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage{caratula/caratula}
+\def\doubleunderline#1{\underline{\underline{#1}}}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+\begin{document}
+
+\input{caratula.tex}
+%Carátula
+\maketitle
+\newpage
+
+%Indice
+\tableofcontents
+\newpage
+
+% Demás secciones
+%
+\section{Introducción}
+
+\section{Documentos para Mongo}
+
+\begin{lstlisting}[language=json]
+
+1) + Para mayor nro. de crimenes cometidos por alguna persona 
+   + Para nro de crimenes promedio cometidos por criminales
+	[
+		{
+			dniCulpable: 37206752,
+			idCasosCulpable:
+				[ 
+					{idCaso: 3}, 
+					{idCaso: 5} 
+				]
+		}
+	]
+
+2) + Para 10 ciudades con mayor nro. de criminales
+	[
+		{
+			idCiudad: 4,
+			idCasosCriminales:
+				[
+					{idCaso: 1}, 
+					{idCaso: 5}
+				]
+		}
+	]
+
+3) + Para personas involucradas como testigos en casos
+	[
+		{
+			dniTestigo: 2789893435,
+			idCasosInvolucradaComoTestigo:
+				[
+					{idCaso: 1},
+					{idCaso: 4},
+					{idCaso: 6}
+				]
+		}
+	]
+
+4) + Para casos con mayor nro. de involucrados
+   + Para casos con mayor nro. de evidencia
+   [
+   		{
+   			idCaso: 4,
+	   		{
+	   			idEvidencias: 
+	   				[	
+	   					{idEvidencia: 3},
+	   					{idEvidencia: 4}
+	   				],
+	   			dniInvolucrados:
+	   				[
+	   					{dniInvolucrado: 37206752}
+	   				]
+	   		}
+	   	}
+   ]
+
+5) + Para cantidad de crimenes de cada tipo cometidos en los ultimos 45 dias
+	[
+		{
+			idTipoCrimen: 4,
+			fechasDeCrimenesDeEseTipo:
+				[
+					{fecha: 2014-10-08},
+					{fecha: 2015-03-10},
+					{fecha: 2016-10-10}
+				]
+		}
+	]
+
+\end{lstlisting}
+
+\section{Conclusiones}
+
+\end{document}

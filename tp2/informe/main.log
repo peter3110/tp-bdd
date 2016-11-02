@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.19)  2 NOV 2016 20:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.19)  2 NOV 2016 20:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -301,6 +301,60 @@ Package babel Info: Making > an active character on input line 662.
 Package: ulem 2012/05/18
 \ULdepth=\dimen114
 )
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count93
+\lst@gtempboxa=\box29
+\lst@token=\toks20
+\lst@length=\count94
+\lst@currlwidth=\dimen115
+\lst@column=\count95
+\lst@pos=\count96
+\lst@lostspace=\dimen116
+\lst@width=\dimen117
+\lst@newlines=\count97
+\lst@lineno=\count98
+\lst@maxwidth=\dimen118
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count99
+\lst@skipnumbers=\count100
+\lst@framebox=\box30
+)
+(/usr/local/texlive/2015/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2014/09/06 1.5e listings configuration
+))
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count101
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
 (./caratula/caratula.sty
 Package: caratula/caratula 2005/08/09 v0.4 Para componer caratulas de TPs del D
 C
@@ -321,49 +375,38 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 94.
-
-(/usr/local/texlive/2015/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count93
-))
-\Gin@req@height=\dimen115
-\Gin@req@width=\dimen116
+\Gin@req@height=\dimen119
+\Gin@req@width=\dimen120
 )
 Cargando package 'caratula' v0.4 (2006/09/29)
-\intlist=\toks20
-\intlistSinLU=\toks21
-\c@integrantesCount=\count94
-\intTabNombre=\toks22
-\intTabLU=\toks23
-\intTabEmail=\toks24
-\c@directoresCount=\count95
-\direcTabNombre=\toks25
-\direcTabEmail=\toks26
+\intlist=\toks21
+\intlistSinLU=\toks22
+\c@integrantesCount=\count102
+\intTabNombre=\toks23
+\intTabLU=\toks24
+\intTabEmail=\toks25
+\c@directoresCount=\count103
+\direcTabNombre=\toks26
+\direcTabEmail=\toks27
 ) (./main.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
-LaTeX Font Info:    ... okay on input line 11.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
+LaTeX Font Info:    ... okay on input line 46.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -399,21 +442,22 @@ LaTeX Font Info:    ... okay on input line 11.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \. on input line 11.
-LaTeX Info: Redefining \% on input line 11.
+LaTeX Info: Redefining \. on input line 46.
+LaTeX Info: Redefining \% on input line 46.
+\c@lstlisting=\count104
 (/usr/local/texlive/2015/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count96
-\scratchdimen=\dimen117
-\scratchbox=\box29
-\nofMPsegments=\count97
-\nofMParguments=\count98
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count99
-\MPscratchDim=\dimen118
-\MPnumerator=\count100
-\makeMPintoPDFobject=\count101
-\everyMPtoPDFconversion=\toks28
+\scratchcounter=\count105
+\scratchdimen=\dimen121
+\scratchbox=\box31
+\nofMPsegments=\count106
+\nofMParguments=\count107
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count108
+\MPscratchDim=\dimen122
+\MPnumerator=\count109
+\makeMPintoPDFobject=\count110
+\everyMPtoPDFconversion=\toks29
 ) (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -462,27 +506,27 @@ e
 File: caratula/logo_dc.jpg Graphic file (type jpg)
 
 <use caratula/logo_dc.jpg>
-Package pdftex.def Info: caratula/logo_dc.jpg used on input line 15.
+Package pdftex.def Info: caratula/logo_dc.jpg used on input line 50.
 (pdftex.def)             Requested size: 215.60497pt x 83.59207pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--15
+Underfull \hbox (badness 10000) in paragraph at lines 50--50
 
  []
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 15.
+(Font)              <10.95> on input line 50.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 15.
+(Font)              <8> on input line 50.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 15.
+(Font)              <6> on input line 50.
 <caratula/logo_uba.jpg, id=2, 225.4824pt x 231.7458pt>
 File: caratula/logo_uba.jpg Graphic file (type jpg)
 
 <use caratula/logo_uba.jpg>
-Package pdftex.def Info: caratula/logo_uba.jpg used on input line 15.
+Package pdftex.def Info: caratula/logo_uba.jpg used on input line 50.
 (pdftex.def)             Requested size: 225.48184pt x 231.74522pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--15
+Underfull \hbox (badness 10000) in paragraph at lines 50--50
 
  []
 
@@ -497,52 +541,44 @@ LaTeX Info: Redefining \% on input line 1.
 \openout3 = `main.toc'.
 
  [2]
-<der.png, id=19, 1165.35374pt x 820.06375pt>
-File: der.png Graphic file (type png)
- <use der.png>
-Package pdftex.def Info: der.png used on input line 45.
-(pdftex.def)             Requested size: 466.13324pt x 328.01968pt.
- [3 <./der.png>]
-Overfull \hbox (9.25746pt too wide) in paragraph at lines 63--66
-[]\OT1/cmr/bx/n/10.95 OficialDePolicia $[]$\OT1/cmr/m/n/10.95 , nu-me-ro-Pla-ca
-, fe-chaIn-gre-so, nu-me-roEs-cri-to-rio, |   [], |   [], |   [] 
- []
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 68.
+
+LaTeX Font Info:    No file OMScmtt.fd. on input line 68.
 
 
-Overfull \hbox (2.41537pt too wide) in paragraph at lines 71--75
-[]\OT1/cmr/bx/n/10.95 CasoCriminal $[]$\OT1/cmr/m/n/10.95 , fe-chaO-cu-rrio, ho
--raO-cu-rrio,  lu-ga-rO-cu-rrio, des-crip-cion, fe-chaIn-gre-so,  |   [],
- []
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbraceleft' on input line 68.
 
-[4] (./main.aux
+[3] [4] (./main.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
-) )
-(\end occurred inside a group at level 1)
+)
 
-### simple group (level 1) entered at line 52 ({)
-### bottom level 
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3178 strings out of 493089
- 42953 string characters out of 6134841
- 122531 words of memory out of 5000000
- 6613 multiletter control sequences out of 15000+600000
+ 5268 strings out of 493089
+ 69474 string characters out of 6134841
+ 218541 words of memory out of 5000000
+ 8685 multiletter control sequences out of 15000+600000
  8770 words of font info for 32 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,8n,30p,368b,384s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmbx10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/
-cm/cmbx12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
-m/cmr10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr12.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-r8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss1
-0.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx
-10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
-0.pfb>
-Output written on main.pdf (4 pages, 707242 bytes).
+ 37i,8n,37p,232b,1658s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
+></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
+</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></
+usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/l
+ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on main.pdf (4 pages, 470326 bytes).
 PDF statistics:
- 54 PDF objects out of 1000 (max. 8388607)
- 35 compressed objects within 1 object stream
+ 55 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
