@@ -24,7 +24,7 @@ INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (27206752, 'Lucas', 'Tavolaro', '1992-10-30', 5);
 
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
-	VALUES (27111222, 'Sebastian', 'Prillo', '1992-12-28', 6);
+	VALUES (27111222, 'Sebastian', 'Prillo', '1992-12-28', 7);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
 	VALUES (27333444, 'Lucia', 'Amor', '1992-10-29', 7);
 INSERT INTO Personas (dni, nombre, apellido, fechaDeNacimiento, idDomicilio)
@@ -471,7 +471,7 @@ CREATE TABLE Involucra
 INSERT INTO Involucra (dni, idCaso, idRol)
 	VALUES (27111222, 1, 1);
 INSERT INTO Involucra (dni, idCaso, idRol)
-	VALUES (27206752, 2, 1);
+	VALUES (27333444, 2, 1);
 INSERT INTO Involucra (dni, idCaso, idRol)
 	VALUES (20111222, 3, 2);
 INSERT INTO Involucra (dni, idCaso, idRol)

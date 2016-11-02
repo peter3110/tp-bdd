@@ -10,7 +10,6 @@ SELECT * FROM Personas p
 
 
 -- Direcciones donde convivieron personas sospechosas de diferentes casos
--- TODO: Da 0 results. ARREGLAR
 SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.piso, dom.depto FROM Domicilios dom
 	JOIN Calles ca ON dom.idCalle = ca.idCalle
 	JOIN Ciudades ciu ON ciu.idCiudad = ca.idCiudad
@@ -28,7 +27,7 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 						SELECT i2.dni FROM Involucra i2
 							JOIN RolEnCaso rc2 ON i2.idRol = rc2.idRol
 							WHERE rc2.nombreRol = 'Acusado' AND
-								  i2.dni != i2.dni
+								  p1.dni != i2.dni
 					)
 			)
 		);
@@ -85,7 +84,6 @@ SELECT pt.texto FROM PresentaTestimonio pt
 	WHERE cc.idCaso = 5;
 
 --Para una categoría en particular listar, para cada uno de los casos, los testimonios asociados
--- TODO: Revisar si esta bien como se ve el resultado
 SELECT * FROM CasosCriminales cc
   JOIN PresentaTestimonio pt ON pt.idCaso = cc.idCaso
 WHERE cc.idCategoria = 4;
