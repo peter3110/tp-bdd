@@ -159,7 +159,7 @@ INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, 
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
 	VALUES (40111222, 769, '2014-11-20', 12, 4, 2, 3);
 INSERT INTO OficialDePolicia (dni, numeroPlaca, fechaIngreso, numeroEscritorio, idRango, idServicio, idDepartamento)
-	VALUES (27206752, 2014, '2016-08-20', 7, 1, 4, 3);
+	VALUES (20333444, 2014, '2016-08-20', 7, 1, 4, 3);
 
 -- Servicio
 CREATE TABLE Servicio

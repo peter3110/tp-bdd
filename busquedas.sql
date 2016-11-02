@@ -72,7 +72,7 @@ SELECT prov.nombreProvincia, ciu.nombreCiudad, ca.nombreCalle, dom.altura, dom.p
 SELECT * FROM OficialDePolicia op
 	WHERE op.dni IN (
 		SELECT i.dni FROM Involucra i
-		WHERE i.idCaso = 2
+		WHERE i.idCaso = 4
 	);
 
 -- Las categorías de casos ordenadas por cantidad de casos
