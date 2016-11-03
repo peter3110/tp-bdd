@@ -62,48 +62,53 @@
 
 A continuaci\'on vamos a definir el documento para Mongo en cada una de las queries dadas y argumentar la elecci\'on de dicho documento contando, a alto nivel, como ser\'ian los inserts, mantenimiento y busqueda con map-reduce.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Querie 1 + 2}
+1. Para mayor nro. de crimenes cometidos por alguna persona \
+2. Para nro de crimenes promedio cometidos por criminales \
 
-\subsection{Querie 3}
+Para estas primeras dos queries, elegimos diseñar el documento expuesto a continuación: Pensamos que lo más importante es optimizar las búsquedas (ie. los map-reduce).
+Para esto, tomamos como clave de cada posible documento el \textbf{dniCulpable} de la persona que fue encontrada culpable de una cantidad \textbf{cantCasosCulpable}) crímenes. \
 
-\subsection{Querie 4}
+Inserts: Cada vez que una persona es hallada culpable de un nuevo caso, hay que acceder al documento que le corresponde a ese dni a través de la key \textbf{dniCulpable}, e incrementar su valor \textbf{cantCasosCulpable}. \
 
-\subsection{Querie 5+6}
+Mantenimiento: cada documento ocupa muy poco espacio, con lo cuál es fácilmente mantenible y escalable.\
 
-\subsection{Querie 7}
-
+Map Reduce: Para las queries 1 y 2 el map mapearía todos los values a un mismo key, y el reduce buscaría el máximo y el promedio de dichos valores respectivamente. \
 
 \begin{lstlisting}[language=json]
-
-1) + Para mayor nro. de crimenes cometidos por alguna persona 
-   + Para nro de crimenes promedio cometidos por criminales
 	[
 		{
 			dniCulpable: 37206752,
-			idCasosCulpable:
-				[ 
-					{idCaso: 3}, 
-					{idCaso: 5} 
-				]
+			cantCasosCulpable: 2
 		}
 	]
+\end{lstlisting}
 
-2) + Para 10 ciudades con mayor nro. de criminales
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Querie 3}
+3. Para 10 ciudades con mayor nro. de crímenes \
+Elegimos el diseño expuesto a continuación: para cada ciudad, guardamos su id \textbf{idCiudad} como clave, y como valor una lista \textbf{dniCulpables} con los casos c 
+\begin{lstlisting}[language=json]
 	[
 		{
 			idCiudad: 4,
-			idCasosCriminales:
+			dniCulpables:
 				[
-					{idCaso: 1}, 
-					{idCaso: 5}
+					{dniCulpable: 37206752}, 
+					{dniCulpable: 35222345}
 				]
 		}
 	]
+\end{lstlisting}
 
-3) + Para personas involucradas como testigos en casos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Querie 4}
+Cuántas personas se han visto involucradas como testigos en el mayor número de casos
+\begin{lstlisting}[language=json]
 	[
 		{
-			dniTestigo: 2789893435,
+			dniTestigo: 27893435,
 			idCasosInvolucradaComoTestigo:
 				[
 					{idCaso: 1},
@@ -112,9 +117,13 @@ A continuaci\'on vamos a definir el documento para Mongo en cada una de las quer
 				]
 		}
 	]
+\end{lstlisting}
 
-4) + Para casos con mayor nro. de involucrados
-   + Para casos con mayor nro. de evidencia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Querie 5+6}
+5. Para casos con mayor nro. de involucrados
+6. Para casos con mayor nro. de evidencia
+\begin{lstlisting}[language=json]
    [
    		{
    			idCaso: 4,
@@ -131,20 +140,27 @@ A continuaci\'on vamos a definir el documento para Mongo en cada una de las quer
 	   		}
 	   	}
    ]
+\end{lstlisting}
 
-5) + Para cantidad de crimenes de cada tipo cometidos en los ultimos 45 dias
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Querie 7}
+7. Para cantidad de crimenes de cada tipo cometidos en los ultimos 45 dias
+Para optimizar el uso del disco, creamos un documento para cada tipo de crimen. Cada documento tiene como valor un diccionario que para cada fecha de los últimos 45 días, tiene como valor la cantidad de crímenes que se cometieron ese día. \
+Mantenimiento: Cada día, hay que recorrer el diccionario correspondiente a cada tipo de crimen, y borrar las entradas correspondientes a fechas de hace más de 45 días. La ventaja de esto, es que sabemos cuánta memoria ocupa cada documento, pues como máximo puede tener 45 fechas. \
+Inserts: Buscar en el tipo de crimen correspondiente, buscar en el diccinario la key correspondiente a la fecha, e incrementar el valor. \
+Map Reduce: El map recorre el diccionario correspondiente al tipo de crimen a buscar, y mapea sobre una misma clave, la suma de todos los crímenes en las fechas que hay guardadas (todas están incluidas en los últimos 45 días). \
+\begin{lstlisting}[language=json]
 	[
 		{
 			idTipoCrimen: 4,
-			fechasDeCrimenesDeEseTipo:
-				[
-					{fecha: 2014-10-08},
-					{fecha: 2015-03-10},
-					{fecha: 2016-10-10}
-				]
+			cantCrimenesPorFecha:
+				{
+					{fecha: 2014-10-08, cantidadDeCrimenes: 4},
+					{fecha: 2015-03-10, cantidadDeCrimenes: 1},
+					{fecha: 2016-10-10, cantidadDeCrimenes: 2}
+				}
 		}
 	]
-
 \end{lstlisting}
 
 \section{Conclusiones}
