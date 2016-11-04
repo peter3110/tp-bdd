@@ -58,53 +58,77 @@
 %
 \section{Introducción}
 
+En el presente trabajo llevamos nuestro proyecto a MongoDB, analizaremos maneras de representarlo para distintas queries con sus ventajas y desventajas y escribiremos el c\'odigo de cada map-reduce.
+
 \section{Documentos para Mongo}
 
 A continuaci\'on vamos a definir el documento para Mongo en cada una de las queries dadas y argumentar la elecci\'on de dicho documento contando, a alto nivel, como ser\'ian los inserts, mantenimiento y busqueda con map-reduce.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Querie 1 + 2}
+\subsection{Cr\'imenes cometidos por persona}
 1. Para mayor nro. de crimenes cometidos por alguna persona \
 2. Para nro de crimenes promedio cometidos por criminales \
 
-Para estas primeras dos queries, elegimos diseñar el documento expuesto a continuación: Pensamos que lo más importante es optimizar las búsquedas (ie. los map-reduce).
-Para esto, tomamos como clave de cada posible documento el \textbf{dniCulpable} de la persona que fue encontrada culpable de una cantidad \textbf{cantCasosCulpable}) crímenes. \
-
-Inserts: Cada vez que una persona es hallada culpable de un nuevo caso, hay que acceder al documento que le corresponde a ese dni a través de la key \textbf{dniCulpable}, e incrementar su valor \textbf{cantCasosCulpable}. \
-
-Mantenimiento: cada documento ocupa muy poco espacio, con lo cuál es fácilmente mantenible y escalable.\
-
-Map Reduce: Para las queries 1 y 2 el map mapearía todos los values a un mismo key, y el reduce buscaría el máximo y el promedio de dichos valores respectivamente. \
+Analizaremos la querie que nos pide el mayor n\'umero de crimines cometidos por alguna persona y n\'umero de cr\'imenes promedio cometidos. Elegimos diseñar el documento expuesto a continuación: 
 
 \begin{lstlisting}[language=json]
 	[
 		{
 			dniCulpable: 37206752,
-			cantCasosCulpable: 2
+			idCaso: 2
 		}
 	]
 \end{lstlisting}
 
+Guardaremos en cada documento el \textbf{dniCulpable} de la persona que fue encontrada culpable del crime \textbf{idCaso}. \
+
+\subsubsection{Insert}
+
+Cada vez que una persona es hallada culpable de un nuevo caso, creamos un nuevo documento con su dni y el caso en cuesti\'on. Esto es una operaci\'on muy r\'apida pues no depende de otros valores.
+
+\subsubsection{Mantenimiento}
+
+Las ventajas de esta manera de representar la informaci\'on est\'an en su mantenimiento. Cada documento ocupa poco espacio y, al no depender de nada m\'as, es facil de mantener y escalar. \
+
+En un principio analizamos la posibilidad de tener un arreglo de casos por cada dni, pero esto requer\'ia mantener una estructura que no sabemos cuanto puede crecer en el tiempo y puede generar problemas al alcanzar el limite de disco. Por eso decidimos utilizar algo m\'as sencillo, pero que podamos garantizar facilmente su mantenimiento y escalabilidad.
+
+\subsubsection{Map-Reduce}
+
+El map nos debe calcular para cada dni, cuantos casos fueron cometidos por esa persona, o en otras palabras, cuantos documentos hay con ese dni. El reduce depende de la querie, en una buscaremos el máximo y en otra el promedio de los valores calculados en el map. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Querie 3}
-3. Para 10 ciudades con mayor nro. de crímenes \
-Elegimos el diseño expuesto a continuación: para cada ciudad, guardamos su id \textbf{idCiudad} como clave, y como valor una lista \textbf{dniCulpables} con los casos c 
+\subsection{Ciudades con mayor n\'umero de cr\'imenes}
+
+Analizaremos la querie que nos pide las 10 ciudades con mayor n\'umero de crímenes. Elegimos el documento expuesto a continuación:\
+
 \begin{lstlisting}[language=json]
 	[
 		{
 			idCiudad: 4,
-			dniCulpables:
-				[
-					{dniCulpable: 37206752}, 
-					{dniCulpable: 35222345}
-				]
+			dniCulpable: 37206752
 		}
 	]
 \end{lstlisting}
 
+Guardaremos en cada documento,  una referencia a la ciudad en \textbf{idCiudad} y un culpable de alg\'un crimen como \textbf{dniCulpable}.
+
+\subsubsection{Insert}
+
+Cada vez que se reporte un nuevo crimen, creamos un documento nuevo con la informaci\'on.
+
+\subsubsection{Mantenimiento}
+
+Es similar a la anterior querie analizada.
+
+\subsubsection{Map-Reduce}
+
+El map nos debe calcular para ciudad, cuantos cr\'imenes tiene (idea similar a la queria anterior). El reduce, debe poder ordenarnos la ciudad seg\'un sus crimenes y quedarnos con las 10 mas grandes.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Querie 4}
-Cuántas personas se han visto involucradas como testigos en el mayor número de casos
+\subsection{Personas como testigos en casos}
+
+La querie consiste en responder cuántas personas se han visto involucradas como testigos en el mayor número de casos. Construimos el siguiente documento:
+
 \begin{lstlisting}[language=json]
 	[
 		{
@@ -119,10 +143,29 @@ Cuántas personas se han visto involucradas como testigos en el mayor número de
 	]
 \end{lstlisting}
 
+En \textbf{dniTestigo} representamos de que testigo se trata y luego tenemos un arreglo denominado \textbf{idCasosInvolucradaComoTestigo} en donde cada elemento es un caso en donde esa persona es testigo.\
+
+Si bien podiamos optar por un dise\~no similar a los anteriores, decidimos probar con otro que tiene otras ventajas y desventajas que marcaremos.
+
+\subsubsection{Insert}
+
+El Insert es mas costoso que en los anteriores pues debemos buscar el documento que contenga el dni del testigo del nuevo caso. Notemos que en caso de no existir un documento debemos crear uno nuevo. Una vez que lo tenemos, debemos agregar un nuevo caso al arreglo.
+
+\subsubsection{Mantenimiento}
+
+Mencionamos este caso anteriormente. La desventaja que tiene es que va a ir creciendo de tama\~no cada documento y eventualmente puede llenar el disco. La soluci\'on que se nos ocurre es que, en caso de pasar eso, creamos un nuevo documento para ese testigo en donde a partir de ese momento iremos agregando los casos. En el map-reduce asumiremos que tenemos este dise\~no ya que es m\'as interesante.
+
+\subsubsection{Map-Reduce}
+
+El map debe decirnos, para un testigo, en cuantos casos estuvo. Esto es simplemente la suma del largo del arreglo \textbf{idCasosInvolucradaComoTestigo} en cada documento en el que aparezca el dni. El reduce debemos primero determinar cu\'al es que apareci\'o en m\'as casos y luego retornar todas las personas que hayan aparecido en exactamente esa cantidad de casos que calculamos.\\
+
+Este Map-Reduce es m\'as eficiente que con el dise\~no usado anteriormente pues recorre muchisimos menos documentos. Recordemos que antes exist\'ia un documento por caso, y ac\'a cada documento va a seguir creciendo hasta que no quede m\'as lugar en el disco.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Querie 5+6}
-5. Para casos con mayor nro. de involucrados
-6. Para casos con mayor nro. de evidencia
+\subsection{Casos con mayor n\'umero de involucrados o evidencias}
+
+Para esas 2 queries utilizaremos un mismo dise\~no que es el siguiente:
+
 \begin{lstlisting}[language=json]
    [
    		{
@@ -142,13 +185,25 @@ Cuántas personas se han visto involucradas como testigos en el mayor número de
    ]
 \end{lstlisting}
 
+En donde usaremos \textbf{idCaso} como clave, y para cada uno tendremos las distintas evidencias en \textbf{idEvidencias} y los involucrados en \textbf{dniInvolucrados}.
+
+\subsubsection{Insert}
+
+A lo largo del tiempo, ir\'an apareciendo evidencias nuevas y gente involucrada. Como en la anterior querie, debemos actualizar el documento agregando dicha informaci\'on seg\'un que caso se trate.
+
+\subsubsection{Mantenimiento}
+
+A diferencia del anterior, en este caso podemos pensar que es realmente muy dificil que llenemos un disco con este documento pues el orden de magnitud de las evidencias y los involucrados no parece ser tanto. En caso de llevar acabo un sistema as\'i, siempre se puede consultar un limite para poder tomar una decisi\'on de dise\~no de estas caracter\'isticas. Adem\'as de esta diferencia, en caso de llenarse el disco podemos utilizar una t\'ecnica similar a la ya expuesta en la queria anterior.
+
+\subsubsection{Map-Reduce}
+
+Dependiendo la querie, dado un caso deberemos contar evidencias o involucrados. Este proceso es an\'alogo al expuesto en el punto anterior, en donde en el map sumaremos el largo de cada arreglo que este relacionado y en el reduce buscaremos el m\'aximo entre todos estos valores calculados.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Querie 7}
-7. Para cantidad de crimenes de cada tipo cometidos en los ultimos 45 dias
-Para optimizar el uso del disco, creamos un documento para cada tipo de crimen. Cada documento tiene como valor un diccionario que para cada fecha de los últimos 45 días, tiene como valor la cantidad de crímenes que se cometieron ese día. \
-Mantenimiento: Cada día, hay que recorrer el diccionario correspondiente a cada tipo de crimen, y borrar las entradas correspondientes a fechas de hace más de 45 días. La ventaja de esto, es que sabemos cuánta memoria ocupa cada documento, pues como máximo puede tener 45 fechas. \
-Inserts: Buscar en el tipo de crimen correspondiente, buscar en el diccinario la key correspondiente a la fecha, e incrementar el valor. \
-Map Reduce: El map recorre el diccionario correspondiente al tipo de crimen a buscar, y mapea sobre una misma clave, la suma de todos los crímenes en las fechas que hay guardadas (todas están incluidas en los últimos 45 días). \
+\subsection{Crimenes cometidos en los \'ultimos 45 d\'ias}
+
+La \'ultima queria nos pide la cantidad de cr\'imenes de cada tipo cometidos en los ultimos 45 dias. Elegimos el siguiente dise\~no para el documento:
+
 \begin{lstlisting}[language=json]
 	[
 		{
@@ -162,6 +217,21 @@ Map Reduce: El map recorre el diccionario correspondiente al tipo de crimen a bu
 		}
 	]
 \end{lstlisting}
+
+En donde \textbf{idTipoCrimen} es la clave que representa un tipo de crimen, y el mapa \textbf{cantCrimenesPorFecha}, cuyas claves son fechas y los valores cantidad de cr\'imenes en cada una. Este documento tendr\'a la propiedad de que solo mantendremos fechas en los \'ultimos 45 d\'ias guardadas (En Mantenimiento desarrollaremos mejor este punto).
+
+\subsubsection{Insert}
+Buscamos el tipo de crimen correspondiente para tener el documento (o crear un nuevo si no existe). Luego, buscamos en el diccinario la clave correspondiente a la fecha, e incrementamos su valor. En caso de no existir dicha clave, la creamos con el valor 1.
+
+\subsubsection{Mantenimiento}
+
+Para optimizar el uso del disco, creamos un documento para cada tipo de crimen, y dicho documento tiene una cantidad de espacio acotado pues puede contener como mucho 45 fechas distintas. Esto es una ventaja a la hora de escalar esta estructura.\
+
+Para poder garantizar la propiedad de que solo contenga crimenes de los \'ultimos 45 d\'ias, cuando cambia de d\'ia debemos realizar una tarea de mantenimiento. Hay que recorrer el diccionario correspondiente a cada tipo de crimen, y borrar las entradas correspondientes a fechas de hace más de 45 días. Este proceso puede ser r\'apido, pues no creemos que existan muchisimos tipos de cr\'imenes y como mencionamos, hay como mucho 45 fechas. Esto quiere decir que en este proceso eliminaremos como mucho 1 de ellas, ya que al cambia de d\'ia alguna puede haber pasado a ser 46 d\'ias antes.
+
+\subsubsection{Map-Reduce}
+
+En el map tendremos el tipo de crimen como la clave, y calcularemos la la suma de todos los crímenes en las fechas que hay guardadas (Recordemos que todas están incluidas en los últimos 45 días). El reduce es simplemente tomar estos valores y mostrarlos. \
 
 \section{Conclusiones}
 
