@@ -21,4 +21,5 @@
 \contentsline {subsubsection}{\numberline {2.5.1}Insert}{6}
 \contentsline {subsubsection}{\numberline {2.5.2}Mantenimiento}{6}
 \contentsline {subsubsection}{\numberline {2.5.3}Map-Reduce}{6}
-\contentsline {section}{\numberline {3}Conclusiones}{6}
+\contentsline {section}{\numberline {3}Implementaci\'on de Map-Reduce}{6}
+\contentsline {section}{\numberline {4}Conclusiones}{6}
