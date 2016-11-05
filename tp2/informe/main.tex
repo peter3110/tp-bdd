@@ -67,6 +67,7 @@ A continuaci\'on vamos a definir el documento para Mongo en cada una de las quer
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Cr\'imenes cometidos por persona}
 1. Para mayor nro. de crimenes cometidos por alguna persona \
+
 2. Para nro de crimenes promedio cometidos por criminales \
 
 Analizaremos la querie que nos pide el mayor n\'umero de crimines cometidos por alguna persona y n\'umero de cr\'imenes promedio cometidos. Elegimos diseñar el documento expuesto a continuación: 
@@ -94,9 +95,27 @@ En un principio analizamos la posibilidad de tener un arreglo de casos por cada 
 
 \subsubsection{Map-Reduce}
 
-El map nos debe calcular para cada dni, cuantos casos fueron cometidos por esa persona, o en otras palabras, cuantos documentos hay con ese dni. El reduce depende de la querie, en una buscaremos el máximo y en otra el promedio de los valores calculados en el map. 
+El map devuelve para una única clave, todos los crímenes cometidos por cada dni. El recorre el array de tuplas, se arma un mapa que guarda para cada dni la cantidad de crímenes cometidos por este, y posteriormente recorre dicho mapa y devuelve el máximo valor en un caso, y el promedio en otro. En el ejemplo, ponemos el caso en que calcula el máximo.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{lstlisting}
+db.doc1.mapReduce(
+    function() {
+        emit(1, (this["dniCulpable"], 1) );
+    },
+    function(key,value) { 
+        var mapa = {};
+        for(i = 0; i < value.length; i++) {
+            mapa[value[i][0]] = mapa[value[i][0]] + 1;
+        }
+        var res = 0;
+        for(var elem in map) {
+        	res = max(res, elem.value);
+        }
+        return res;
+)
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ciudades con mayor n\'umero de cr\'imenes}
 
 Analizaremos la querie que nos pide las 10 ciudades con mayor n\'umero de crímenes. Elegimos el documento expuesto a continuación:\
@@ -122,8 +141,24 @@ Es similar a la anterior querie analizada.
 
 \subsubsection{Map-Reduce}
 
-El map nos debe calcular para ciudad, cuantos cr\'imenes tiene (idea similar a la queria anterior). El reduce, debe poder ordenarnos la ciudad seg\'un sus crimenes y quedarnos con las 10 mas grandes.
-
+El map nos debe calcular para ciudad, cuantos cr\'imenes tiene (idea similar a la queria anterior). El reduce, debe poder ordenarnos la ciudad seg\'un sus crimenes y quedarnos con las 10 mas grandes. Para hacer esto, creamos un heap de tamaño 10, y al recorrer el mapa, insertamos de forma ordenada cada valor.
+\begin{lstlisting}
+db.doc2.mapReduce(
+    function() {
+        emit(1, (this["idCiudad"], 1) );
+    },
+    function(key,value) { 
+        var mapa = {};
+        for(i = 0; i < value.length; i++) {
+            mapa[value[i][0]] = mapa[value[i][0]] + 1;
+        }
+        var res = binaryHeap(10);
+        for(var elem in map) {
+        	res.insert(elem.value);
+        }
+        return res;
+)
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Personas como testigos en casos}
 
@@ -160,7 +195,27 @@ Mencionamos este caso anteriormente. La desventaja que tiene es que va a ir crec
 El map debe decirnos, para un testigo, en cuantos casos estuvo. Esto es simplemente la suma del largo del arreglo \textbf{idCasosInvolucradaComoTestigo} en cada documento en el que aparezca el dni. El reduce debemos primero determinar cu\'al es que apareci\'o en m\'as casos y luego retornar todas las personas que hayan aparecido en exactamente esa cantidad de casos que calculamos.\\
 
 Este Map-Reduce es m\'as eficiente que con el dise\~no usado anteriormente pues recorre muchisimos menos documentos. Recordemos que antes exist\'ia un documento por caso, y ac\'a cada documento va a seguir creciendo hasta que no quede m\'as lugar en el disco.
-
+\begin{lstlisting}
+db.doc3.mapReduce(
+    function() {
+        emit(this["dniTestigo"], this["idCasosInvolucradaComoTestigo"].length);
+    },
+    function(key,value) { 
+        max = value[0];
+        for(i = 1; i < value.length; i++) {
+            if (max < value[i]) { 
+                max = value[i];  
+            }
+        }
+        var res = 0;
+        for(i = 0; i < value.length; i++) {
+        	if (value[i] == max) {
+        		res = res + 1;
+        	}
+        }
+        return res;
+)
+\end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Casos con mayor n\'umero de involucrados o evidencias}
 
@@ -197,12 +252,35 @@ A diferencia del anterior, en este caso podemos pensar que es realmente muy difi
 
 \subsubsection{Map-Reduce}
 
-Dependiendo la querie, dado un caso deberemos contar evidencias o involucrados. Este proceso es an\'alogo al expuesto en el punto anterior, en donde en el map sumaremos el largo de cada arreglo que este relacionado y en el reduce buscaremos el m\'aximo entre todos estos valores calculados.
+Dependiendo la querie, dado un caso deberemos contar evidencias o involucrados. \
+En el próximo ejemplo, sólo vamos a contar evidencias. \
+En el map, mapeamos a un mismo key tuplas con el idCaso y la cantidad de evidencias correspondientes a dicho caso. En el reduce, recorremos el arreglo de valores \textbf{value}, y vamos guardando en un mapa para cada idCaso, la cantidad de evidencias que le corresponden. En la variable $maximo$, vamos actualizando en cada paso la máxima cantidad de evidencias que tiene algún caso. Luego, recorremos el mapa y devolvemos todos los idCaso cuyo valor es igual a la variable $maximo$.
+\begin{lstlisting}
+db.doc4.mapReduce(
+    function() {
+        emit(1, (this["idCaso"], this["idEvidencias"].length) );
+    },
+    function(key,value) { 
+        var maximo = 0;
+        var mapa = {};
+        for(i = 0; i < value.length; i++) {
+            mapa[value[i][0]] = mapa[value[i][0]] + value[i][1];
+            maximo = max(maximo, mapa[value[i][0]]);
+        }
+        var res = new Array();
+        for(var elem in mapa) {
+        	if (elem.value == maximo) {
+        		res.push(elem.key);
+        	}
+        }
+        return res;
+)
+\end{lstlisting}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Crimenes cometidos en los \'ultimos 45 d\'ias}
 
-La \'ultima queria nos pide la cantidad de cr\'imenes de cada tipo cometidos en los ultimos 45 dias. Elegimos el siguiente dise\~no para el documento:
+La \'ultima querie nos pide la cantidad de cr\'imenes de cada tipo cometidos en los ultimos 45 dias. Elegimos el siguiente dise\~no para el documento:
 
 \begin{lstlisting}[language=json]
 	[
@@ -210,9 +288,9 @@ La \'ultima queria nos pide la cantidad de cr\'imenes de cada tipo cometidos en 
 			idTipoCrimen: 4,
 			cantCrimenesPorFecha:
 				{
-					{fecha: 2014-10-08, cantidadDeCrimenes: 4},
-					{fecha: 2015-03-10, cantidadDeCrimenes: 1},
-					{fecha: 2016-10-10, cantidadDeCrimenes: 2}
+					'2014-10-08': 4,
+					'2015-03-10': 1,
+					'2016-10-10': 2
 				}
 		}
 	]
@@ -231,8 +309,28 @@ Para poder garantizar la propiedad de que solo contenga crimenes de los \'ultimo
 
 \subsubsection{Map-Reduce}
 
-En el map tendremos el tipo de crimen como la clave, y calcularemos la la suma de todos los crímenes en las fechas que hay guardadas (Recordemos que todas están incluidas en los últimos 45 días). El reduce es simplemente tomar estos valores y mostrarlos. \
+En el map tendremos el tipo de crimen como la clave, y como valor emitiremos las cantidades de crímenes registradas en cada fecha. \
+En el reduce calcularemos la suma de todos los crímenes en las fechas que hay guardadas (recordemos que todas están incluidas en los últimos 45 días). \
+\begin{lstlisting}
+db.doc5.mapReduce(
+    function() {
+    	for (i = 0; i < this["cantCrimenesPorFecha"].length; i++) {
+    		for (var elem in this["cantCrimenesPorFecha"][i]) {
+				emit(this["idTipoCrimen"], elem.value);
+			}
+    	}
+    },
+    function(key,value) {
+    	var res = 0;
+    	for (i = 0; i < value.length; i++) {
+    		res = res + value[i];
+    	}
+    	return res;
+    }
+)
+\end{lstlisting}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Implementaci\'on de Map-Reduce}
 
 \section{Conclusiones}
