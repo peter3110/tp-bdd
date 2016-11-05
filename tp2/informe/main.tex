@@ -95,7 +95,7 @@ En un principio analizamos la posibilidad de tener un arreglo de casos por cada 
 
 \subsubsection{Map-Reduce}
 
-El map devuelve para una única clave, todos los crímenes cometidos por cada dni. El recorre el array de tuplas, se arma un mapa que guarda para cada dni la cantidad de crímenes cometidos por este, y posteriormente recorre dicho mapa y devuelve el máximo valor en un caso, y el promedio en otro. En el ejemplo, ponemos el caso en que calcula el máximo.
+El map devuelve para una única clave, todos los crímenes cometidos por cada dni. Se recorre el array de tuplas, se arma un mapa que guarda para cada dni la cantidad de crímenes cometidos por este, y posteriormente se recorre dicho mapa y devuelve el máximo valor en un caso, y el promedio en otro. En el ejemplo, ponemos el caso en que calcula el máximo.
 
 \begin{lstlisting}
 db.doc1.mapReduce(
@@ -141,7 +141,7 @@ Es similar a la anterior querie analizada.
 
 \subsubsection{Map-Reduce}
 
-El map nos debe calcular para ciudad, cuantos cr\'imenes tiene (idea similar a la queria anterior). El reduce, debe poder ordenarnos la ciudad seg\'un sus crimenes y quedarnos con las 10 mas grandes. Para hacer esto, creamos un heap de tamaño 10, y al recorrer el mapa, insertamos de forma ordenada cada valor.
+El map nos debe calcular para ciudad, cuantos cr\'imenes tiene (idea similar a la querie anterior). El reduce, debe poder ordenarnos la ciudad seg\'un sus crimenes y quedarnos con las 10 mas grandes. Para hacer esto, creamos un heap de tamaño 10, y al recorrer el mapa, insertamos de forma ordenada cada valor.
 \begin{lstlisting}
 db.doc2.mapReduce(
     function() {
@@ -201,15 +201,15 @@ db.doc3.mapReduce(
         emit(this["dniTestigo"], this["idCasosInvolucradaComoTestigo"].length);
     },
     function(key,value) { 
-        max = value[0];
+        maximo = value[0];
         for(i = 1; i < value.length; i++) {
-            if (max < value[i]) { 
-                max = value[i];  
+            if (maximo < value[i]) { 
+                maximo = value[i];  
             }
         }
         var res = 0;
         for(i = 0; i < value.length; i++) {
-        	if (value[i] == max) {
+        	if (value[i] == maximo) {
         		res = res + 1;
         	}
         }
@@ -248,7 +248,7 @@ A lo largo del tiempo, ir\'an apareciendo evidencias nuevas y gente involucrada.
 
 \subsubsection{Mantenimiento}
 
-A diferencia del anterior, en este caso podemos pensar que es realmente muy dificil que llenemos un disco con este documento pues el orden de magnitud de las evidencias y los involucrados no parece ser tanto. En caso de llevar acabo un sistema as\'i, siempre se puede consultar un limite para poder tomar una decisi\'on de dise\~no de estas caracter\'isticas. Adem\'as de esta diferencia, en caso de llenarse el disco podemos utilizar una t\'ecnica similar a la ya expuesta en la queria anterior.
+A diferencia del anterior, en este caso podemos pensar que es realmente muy dificil que llenemos un disco con este documento pues el orden de magnitud de las evidencias y los involucrados no parece ser tanto. En caso de llevar acabo un sistema as\'i, siempre se puede consultar un limite para poder tomar una decisi\'on de dise\~no de estas caracter\'isticas. Adem\'as de esta diferencia, en caso de llenarse el disco podemos utilizar una t\'ecnica similar a la ya expuesta en la querie anterior.
 
 \subsubsection{Map-Reduce}
 
