@@ -1,0 +1,177 @@
+
+///////
+
+En 2.5.2. Mantenimiento, no es necesario borrar el día más viejo de los 45 días, sino que se podría sobreescribir el día más viejo, con el nuevo día con contador 0 para todos los tipos de crímenes, cuando se cambia de día.
+
+////////
+
+/* Ej 1 : Para mayor nro. de crimenes cometidos por alguna persona */
+map11 = function () {
+	emit( this . dniCulpable , 1 ); 
+};
+var reduce11 = function(key,values) {
+	return Array.sum( values ); 
+};
+var map12 = function () {
+	emit( 1, this.value );	
+};
+var reduce12 = function(key, values) {
+	max = values[0];
+	for (var i=0; i<values.length; i++) {
+		if(values[i] > max) {
+			max = values[i];
+		}
+	}
+	return max;
+};
+db . doc1 . mapReduce (map11, reduce11, {out: "temp1"} );
+db . temp1 . mapReduce (map12, reduce12, {out: "ej1"});
+db . ej1. find();
+
+/* Ej 2 : Para nro de crimenes promedio cometidos por criminales */
+
+var reduce21 = function(key, values) {
+	sum = 0;
+	cnt = 0;
+	for (var i=0; i<values.length; i++) {
+		cnt = cnt + 1;
+		sum = sum + values[i];
+	}
+	return sum / cnt;
+};
+db . doc1 . mapReduce (map11, reduce11, {out: "temp2"} );
+db . temp2 . mapReduce (map12, reduce21, {out: "ej2"} );
+
+
+/* Ej3: 10 ciudades con mayor numero de crimenes */
+
+var map31 = function() {
+	emit(this . idCiudad, 1);
+};
+var reduce31 = function(key, values) {
+	return Array.sum(values);
+};
+db . doc2 . mapReduce(map31, reduce31, {out:"temp3"} );
+db.temp3.find().sort({value: -1}).limit(10);
+
+/* Ej4: personas que fueron testigos en la mayor cantidad de casos */
+var map41 = function() {
+	emit (1, {
+		testigo: this . dniTestigo, 
+		valor: this . idCasosInvolucradoComoTestigo . length
+	});
+};
+var reduce41 = function(key, values) {
+	id_max = values[0].testigo;
+	val_max = values[0].valor;
+	for(var i=1; i<values.length; i++) {
+		if(val_max < values[i].valor) {
+			id_max = values[i].testigo;
+			val_max = values[i].valor;
+		}
+	}
+	return {
+		valMax: val_max,
+		valor: values
+	};
+};
+var map42 = function() {
+	for(var i=0; i<this . value . valor . length; i++) {
+		if(this . value . valor[i] . valor == this . value . valMax) {	
+			emit(1, 
+				 this . value . valor[i] . testigo
+			);
+		}
+	}
+};
+var reduce42 = function(key, values) {
+	const result = {
+		list: []
+	};
+	values.forEach((value, index) => result.list = result.list.concat(value));
+	return result;
+};
+db . doc3 . mapReduce(map41, reduce41, {out:"temp4"} );
+db . temp4 . mapReduce(map42, reduce42, {out:"ej4"} );
+
+/* Ej5 : Casos con mayor numero de involucrados (doc4) */
+var map51 = function() {
+	emit(1, {
+		idCaso: this . idCaso,
+		cantidad: this . dniInvolucrados . length
+	});
+};
+var reduce51 = function(key, values) {
+	id_max = values[0].idCaso;
+	val_max = values[0].cantidad;
+	for(var i=1; i<values.length; i++) {
+		if(val_max < values[i].cantidad) {
+			id_max = values[i].idCaso;
+			val_max = values[i].cantidad;
+		}
+	}
+	return {
+		cantMax: val_max,
+		valor: values
+	};
+};
+var map52 = function() {
+	for(var i=0; i<this . value . valor . length; i++) {
+		if(this . value . valor[i] . cantidad == this . value . cantMax) {
+			emit(1, this . value . valor[i] . idCaso);
+		}
+	}
+};
+var reduce52 = function(key, values) {
+	const result = {
+		list: []
+	};
+	values.forEach((value, index) => result.list = result.list.concat(value));
+	return result;
+};
+db . doc4 . mapReduce(map51, reduce51, {out:"temp5"} );
+db . temp5 . mapReduce(map52, reduce52, {out:"ej5"} );
+####################################################################
+
+/* Ej6 : Cantidad total de evidencia por caso (doc4) */
+var map61 = function() {
+	emit( this . idCaso, this . idEvidencias . length );
+};
+var reduce61 = function(key, values) {
+	const result = {
+		list: []
+	};
+	values.forEach((value, index) => result.list = result.list.concat(value));
+	return result;
+};
+db . doc4 . mapReduce(map61, reduce61, {out:"ej6"} );
+
+/* Ej7 : Cantidad de crimenes por localidad y anio (doc2) */
+
+var map71 = function() {
+	emit( 
+	{
+		ciudad: this . idCiudad, 
+		anio: this . anio
+	}, 1 );
+};
+var reduce71 = function(key, values) {
+	return Array.sum(values);
+};
+db . doc2 . mapReduce(map71, reduce71, {out:"ej7"} );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

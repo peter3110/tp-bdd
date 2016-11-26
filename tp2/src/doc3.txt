@@ -1,0 +1,33 @@
+db.doc3.drop();
+db.doc3.insert(
+[
+	{
+		dniTestigo: 1,
+		idCasosInvolucradoComoTestigo:
+			[
+				1,2,3,4,5	
+			]
+	},
+	{
+		dniTestigo: 2,
+		idCasosInvolucradoComoTestigo:
+			[
+				1,2	
+			]
+	},
+	{
+		dniTestigo: 3,
+		idCasosInvolucradoComoTestigo:
+			[
+				3,4,5	
+			]
+	},
+	{
+		dniTestigo: 4,
+		idCasosInvolucradoComoTestigo:
+			[
+				6,7,8,9,10	
+			]
+	},
+]
+);

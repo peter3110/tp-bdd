@@ -1,0 +1,53 @@
+/* Doc1 :
+	1. Para mayor nro. de crimenes cometidos por alguna persona
+	2. Para nro de crimenes promedio cometidos por criminales
+*/
+db.doc1.drop();
+db.doc1.insert(
+[
+	{
+		dniCulpable: 48163201,
+		idCaso: 1
+	},
+	{
+		dniCulpable: 48163201,
+		idCaso: 2
+	},
+	{
+		dniCulpable: 48163202,
+		idCaso: 2
+	},
+	{
+		dniCulpable: 48163203,
+		idCaso: 3
+	},
+	{
+		dniCulpable: 48163204,
+		idCaso: 4
+	},
+	{
+		dniCulpable: 48163205,
+		idCaso: 5
+	},
+	{
+		dniCulpable: 48163206,
+		idCaso: 6
+	},
+	{
+		dniCulpable: 48163217,
+		idCaso: 1
+	},
+	{
+		dniCulpable: 48163228,
+		idCaso: 2
+	},
+	{
+		dniCulpable: 48163228,
+		idCaso: 3
+	},
+	{
+		dniCulpable: 48163228,
+		idCaso: 4
+	},
+]
+);

@@ -1,0 +1,113 @@
+/*
+	Doc2 : 10 ciudades con mayor numero de crimenes
+*/
+db.doc2.drop();
+db.doc2.insert(
+[
+	{
+		idCiudad: 1,
+		idCrimen: 37206750,
+		anio: 2001
+	},
+	{
+		idCiudad: 2,
+		idCrimen: 37206751,
+		anio: 2001
+	},
+	{
+		idCiudad: 3,
+		idCrimen: 37206752,
+		anio: 2001
+	},
+	{
+		idCiudad: 4,
+		idCrimen: 37206753,
+		anio: 2002
+	},
+	{
+		idCiudad: 1,
+		idCrimen: 37206754,
+		anio: 2003
+	},
+	{
+		idCiudad: 2,
+		idCrimen: 37206755,
+		anio: 2004
+	},
+	{
+		idCiudad: 3,
+		idCrimen: 37206756,
+		anio: 2010
+	},
+	{
+		idCiudad: 4,
+		idCrimen: 37206757,
+		anio: 2010
+	},
+	{
+		idCiudad: 5,
+		idCrimen: 37206758,
+		anio: 2010
+	},
+	{
+		idCiudad: 6,
+		idCrimen: 37206750,
+		anio: 2010
+	},
+	{
+		idCiudad: 7,
+		idCrimen: 37206750,
+		anio: 2011
+	},
+	{
+		idCiudad: 8,
+		idCrimen: 37206750,
+		anio: 2011
+	},
+	{
+		idCiudad: 9,
+		idCrimen: 37206750,
+		anio: 2010
+	},
+	{
+		idCiudad: 10,
+		idCrimen: 37206751,
+		anio: 2010
+	},
+	{
+		idCiudad: 11,
+		idCrimen: 37206751,
+		anio: 2010
+	},
+	{
+		idCiudad: 12,
+		idCrimen: 37206751,
+		anio: 2010
+	},
+	{
+		idCiudad: 13,
+		idCrimen: 37206752,
+		anio: 2010
+	},
+	{
+		idCiudad: 14,
+		idCrimen: 37206752,
+		anio: 2011
+	},
+	{
+		idCiudad: 15,
+		idCrimen: 37206752,
+		anio: 2011
+	},
+	{
+		idCiudad: 15,
+		idCrimen: 37206759,
+		anio: 2012
+	},
+	{
+		idCiudad: 1,
+		idCrimen: 37373737,
+		anio: 2001
+	},
+]
+);

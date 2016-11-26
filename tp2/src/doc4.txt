@@ -1,0 +1,56 @@
+/* Documento para ej5 : 
+	1) Casos con mayor numero de involucrados 
+	2) Cantidad total de evidencais por caso
+*/
+
+db.doc4.drop();
+db.doc4.insert(
+[
+	{
+		idCaso: 1,
+		idEvidencias: 
+			[
+				1,2,3
+			],
+		dniInvolucrados: 
+			[
+				37206752, 37206777
+			]
+	},
+	{
+		idCaso: 2,
+		idEvidencias: 
+			[
+				4,5,6
+			],
+		dniInvolucrados: 
+			[
+				12345678,23456789
+			]
+	},
+	{
+		idCaso: 3,
+		idEvidencias: 
+			[
+				1,2,5,6
+			],
+		dniInvolucrados: 
+			[
+				37206752, 37206777,12345678
+			]
+	},
+	{
+		idCaso: 4,
+		idEvidencias: 
+			[
+				1,2,5,6,7,8,9
+			],
+		dniInvolucrados: 
+			[
+				37206752, 37206777,23456789
+			]
+	},
+]
+);
+
+
