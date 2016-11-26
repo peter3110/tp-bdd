@@ -79,6 +79,20 @@
 
 % Demás secciones
 %
+
+\section{Correcciones Realizadas}
+Para esta reentrega, efectuamos varias correcciones:
+\begin{itemize}
+	\item cambiamos la estructura del TP: lo dividimos en 4 partes, según los 4 documentos que decidimos crear para cumplir con las queries que el gobierno quiere responder rápidamente, y con las queries que se desean resolver con el map-reduce.
+	\item en  'Ciudades con mayor número de crímenes' cambiamos \textbf{dni} por \textbf{idCaso}, para considerar el caso en que un mismo crimen es cometido por varias personas como un único crimen
+	\item en 'Personas como testigos en casos',  buscamos las personas que se han visto involucradas como testigos en el mayor número de casos en lugar de buscar la cantidad de personas que se han visto involucradas como testigos en el mayor número de casos.
+	\item eliminamos el documento que habíamos pensado para resolver la querie sobre 'la cantidad de crímenes de cada tipo que ocurrieron en los últimos 45 días'. Para responder esta querie, agregamos más datos a otro de los documentos que habíamos creado.
+	\item cambiamos el método de resolución de todas las queries con map-reduce, utilizando en la mayoría de los casos dos map-reduce en lugar de uno solo, simplificando así enormemente la complejidad de las queries.
+	\item llenamos una base de datos de MongoDB con documentos de ejemplo para probar las queries map-reduce.
+	\item agregamos los JSONSchema correspondientes a cada documento 
+\end{itemize}
+
+\newpage
 \section{Introducción}
 
 En el presente trabajo llevamos nuestro proyecto a MongoDB, analizaremos maneras de representarlo para distintas queries con sus ventajas y desventajas y escribiremos el c\'odigo de cada map-reduce.
@@ -101,7 +115,13 @@ Elegimos diseñar el documento \textbf{doc1}. A continuación exponemos un ejemp
 	]
 \end{lstlisting}
 
-Guardaremos en cada documento el \textbf{dniCulpable} de la persona que fue encontrada culpable del crimen \textbf{idCaso}. \
+Guardaremos en cada documento el \textbf{dniCulpable} de la persona que fue encontrada culpable del crimen \textbf{idCaso}. Para poder crear este documento tomamos del DER original los siguientes atributos: de la entidad \textbf{Personas}, el atributo \textbf{dni}, y de la entidad \textbf{CasoCriminal}, el atributo \textbf{idCaso}. \
+
+Con este documento podemos responder las siguientes queries que el gobierno quiere responder frecuentemente:
+\begin{itemize}
+	\item cuál es el número promedio de crímenes cometidos por personas que ya han sido encontradas culpables de algún crimen?
+	\item cuál es el mayor número de crímenes cometido por alguna persona?
+\end{itemize}
 
 El JSONSchema correspondiente sería:
 \begin{lstlisting}[language=json]
@@ -188,12 +208,20 @@ Elegimos el documento \textbf{doc2}. A continuación, un ejemplo:\
 		{
 			idCiudad: 4,
 			idCrimen: 12423,
-			anio: 2001
+			anio: 2001,
+			fecha: '2001-10-11',
+			idCategoriaCrimen: 2
 		}
 	]
 \end{lstlisting}
 
-Guardaremos en cada documento,  una referencia a la ciudad en \textbf{idCiudad}, un crimen como \textbf{idCrimen} y el \textbf{anio} en que dicho crimen fue cometido. \
+Guardaremos en cada documento,  una referencia a la ciudad en \textbf{idCiudad}, un crimen como \textbf{idCrimen} y el \textbf{anio} en que dicho crimen fue cometido, y por otra parte la \textbf{fecha} en la que este fue cometido. Para crear este documento, tomamos del DER original los siguientes atributos: de la entidad \textbf{Ciudad}, el atributo \textbf{idCiudad}, de la entidad \textbf{CasoCriminal} los atributos \textbf{idCaso}, y \textbf{fechaOcurrio}. También, de la entidad \textbf{CategoríaCaso}, el atirbuto \textbf{idCategoría}. \
+
+Con este documento podemos responder las siguientes queries que el gobierno quiere responder frecuentemente:
+\begin{itemize}
+	\item qué cantidad, de cada tipo de crimen ocurrieron en los últimos 45 días?
+	\item cuales son las 10 ciudades con mayor número de crímenes?
+\end{itemize}
 
 El JSONSchema correspondiente sería:
 \begin{lstlisting}[language=json]
@@ -202,7 +230,9 @@ El JSONSchema correspondiente sería:
 	"properties" : {
 		"idCiudad" : {"type" : integer},
 		"idCrimen" : {"type" : integer},
-		"anio" : {"type" : integer}
+		"anio" : {"type" : integer},
+		"fecha" : {"type" : Date},
+		"idCategoriaCrimen" : {"type" : integer}
 	}
 }
 \end{lstlisting}
@@ -272,7 +302,12 @@ Una instancia de ejemplo para este documento podría ser:
 	]
 \end{lstlisting}
 
-Guardaremos en cada documento,  una referencia al testigo con \textbf{dniTestigo}, y para cada uno de estos, un array \textbf{idCasosInvolucradaComoTestigo}, que tiene en cada entrada un \textbf{idCaso} con los casos en los que el testigo estuvo involucrado. \
+Guardaremos en cada documento,  una referencia al testigo con \textbf{dniTestigo}, y para cada uno de estos, un array \textbf{idCasosInvolucradaComoTestigo}, que tiene en cada entrada un \textbf{idCaso} con los casos en los que el testigo estuvo involucrado. Para crear este documento, tomamos del DER original los siguientes atributos: de la entidad \textbf{Personas}, el atributo \textbf{dni}, y de la entidad \textbf{CasoCriminal}, el atributo \textbf{idCaso}. \
+
+Con este documento podemos responder las siguientes queries que el gobierno quiere responder frecuentemente:
+\begin{itemize}
+	\item cuales son las personas que se han visto involucradas como testigos en el mayor número de casos?
+\end{itemize}
 
 El JSONSchema correspondiente sería:
 \begin{lstlisting}[language=json]
@@ -350,7 +385,7 @@ db . doc3 . mapReduce(map41, reduce41, {out:"temp4"} );
 db . temp4 . mapReduce(map42, reduce42, {out:"ej4"} );
 \end{lstlisting}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Documeneto 4 y consultas asociadas}
+\subsection{Documento 4 y consultas asociadas}
 
 Finalmente, pensamos otro diseño más, para resolver las consultas restantes. Llamamo a este \textbf{doc4}. A continuación exponemos una instancia de ejemplo.
 
@@ -373,7 +408,13 @@ Finalmente, pensamos otro diseño más, para resolver las consultas restantes. L
    ]
 \end{lstlisting}
 
-Guardamos en cada documento un \textbf{idCaso}, y para cada uno de estos tendremos un arreglo con las distintas evidencias en \textbf{idEvidencias} y otro con los involucrados en \textbf{dniInvolucrados}. \
+Guardamos en cada documento un \textbf{idCaso}, y para cada uno de estos tendremos un arreglo con las distintas evidencias en \textbf{idEvidencias} y otro con los involucrados en \textbf{dniInvolucrados}. Para poder generar este documento, tomamos del DER original los siguientes atributos: de la entidad \textbf{CasoCriminal}, el atributo \textbf{idCaso}, de la entidad \textbf{Evidencia}, el atributo \textbf{idEvidencia}, y de la entidad \textbf{Personas}, el atributo \textbf{dni}. \
+
+Con este documento podemos responder las siguientes queries que el gobierno quiere responder frecuentemente:
+\begin{itemize}
+	\item cuáles son los casos en los que se han visto involucradas (cualquier rol) el mayor número de personas?
+	\item cuáles son los casos con mayor número de evidencias?
+\end{itemize}
 
 El JSONSchema correspondiente sería:
 \begin{lstlisting}[language=json]
