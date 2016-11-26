@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.19)  5 NOV 2016 21:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.9)  26 NOV 2016 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -524,7 +524,7 @@ LaTeX Info: Redefining \% on input line 6.
 ### bottom level 
 Here is how much of TeX's memory you used:
  3178 strings out of 493089
- 42953 string characters out of 6134841
+ 42953 string characters out of 6134842
  122531 words of memory out of 5000000
  6613 multiletter control sequences out of 15000+600000
  8770 words of font info for 32 fonts, out of 8000000 for 9000
