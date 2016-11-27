@@ -517,6 +517,79 @@ var reduce61 = function(key, values) {
 db . doc4 . mapReduce(map61, reduce61, {out:"ej6"} );
 \end{lstlisting}
 
+\subsection{Documento 5: para que los oficiales detecten sospechosos rápidamente}
+
+Finalmente, agregamos otro documento, que no utilizaremos para ninguna de las búsquedas que se piden en el TP, pero que es necesario para cumplir con una de las cosas que pide el TP, que es que los datos de cada persona sean rápidamente accesibles, incluyendo su domicilio y un listado abreviado de los crímenes (rol, tipo y fecha), a los fines de que los oficiales puedan tener un prontuario de cada persona en forma instantánea. Para esto, creamos un nuevo documento, que lo llamamos \textbf{doc5}. A continuación, mostramos un ejemplo de cómo sería este documento:
+\begin{lstlisting}[language=json]
+{
+	dniPersona: 37206752,
+	nombre: Pedro,
+	apellido: Rodriguez,
+	fechaNacimiento: '1992-10-31',
+	telefonos: [
+		{num: 1544009743}, 
+		{num: 47478964}
+	],
+	domicilios: [
+		{
+			provincia: 'Buenos Aires',
+			ciudad: 'CABA',
+			calle: 'Callao',
+			depto: 'A',
+			altura: '1000',
+			piso: '10'
+		}
+	], 
+	crimenes: [
+		{
+			idCrimen: 4,
+			rolCrimen: 'culpable',
+			fecha: '2010-10-10',
+			tipoCrimen: 'robo'
+		}
+	]
+}
+\end{lstlisting}
+
+Para realizar este documento, utilizamos las entidades \textbf{Persona} (para nombre, dnipersona, apellido, fechaNacimiento, teléfonos), \textbf{Domicilio}, \textbf{Calle}, \textbf{Ciudad} y \textbf{Provincia} (para proveer el domicilio de cada persona), y \textbf{CasoCriminal}, \textbf{CategoriaCaso} y \textbf{RolEnCaso}, para obtener el resumen de los crímenes en los cuales la persona estuvo involucrada. El JSONSchema sería:
+\begin{lstlisting}[language=json]
+{
+	"type" : object, 
+	"properties" : {
+		dniPersona: {type : integer},
+		nombre: {type : string},
+		apellido: {type : string},
+		fechaNacimiento: {type : Date},
+		telefonos: {
+			type: array,
+			properties: {
+				num: {type : integer}
+			}
+		},
+		domicilios: {
+			type: array,
+			properties: {
+				provincia : {type : string},
+				ciudad : {type : string},
+				calle: {type : string},
+				depto : {type : string},
+				altura : {type : integer},
+				piso : {type : integer}
+			}
+		},
+		crimenes: {
+			type: array,
+			properties: {
+				idCrimen : {type : integer},
+				rolCrimen : {type : string},
+				fecha: {type : Date},
+				tipoCrimen: {type : string}
+			}
+		}
+	}
+}
+\end{lstlisting}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Conclusiones}

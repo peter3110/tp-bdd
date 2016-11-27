@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.9)  26 NOV 2016 17:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.9)  27 NOV 2016 15:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -567,7 +567,7 @@ s-ma cla-ve, to-dos los pa-res $\OML/cmm/m/it/10.95 < idCaso; cantidadInvolucra
 dos >$
  []
 
-[10] [11] (./main.aux
+[10] [11] [12] [13] (./main.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
@@ -576,10 +576,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5416 strings out of 493089
- 71239 string characters out of 6134842
- 240129 words of memory out of 5000000
- 8833 multiletter control sequences out of 15000+600000
+ 5442 strings out of 493089
+ 71546 string characters out of 6134842
+ 257129 words of memory out of 5000000
+ 8859 multiletter control sequences out of 15000+600000
  9077 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  37i,8n,42p,853b,1687s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -593,10 +593,10 @@ cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/loc
 al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/lo
 cal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/loc
 al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on main.pdf (11 pages, 518747 bytes).
+Output written on main.pdf (13 pages, 525288 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
+ 89 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
